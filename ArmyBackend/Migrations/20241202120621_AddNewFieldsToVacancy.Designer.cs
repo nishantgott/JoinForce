@@ -4,6 +4,7 @@ using ArmyBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArmyBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241202120621_AddNewFieldsToVacancy")]
+    partial class AddNewFieldsToVacancy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,12 +221,7 @@ namespace ArmyBackend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserNotificationsId")
-                        .HasColumnType("int");
-
                     b.HasKey("NotificationId");
-
-                    b.HasIndex("UserNotificationsId");
 
                     b.ToTable("Notifications");
                 });
@@ -393,22 +391,6 @@ namespace ArmyBackend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserNotifications", b =>
-                {
-                    b.Property<int>("UserNotificationsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserNotificationsId"));
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserNotificationsId");
-
-                    b.ToTable("UserNotifications");
-                });
-
             modelBuilder.Entity("Vacancy", b =>
                 {
                     b.Property<int>("VacancyId")
@@ -465,18 +447,6 @@ namespace ArmyBackend.Migrations
                     b.HasKey("VacancyId");
 
                     b.ToTable("Vacancies");
-                });
-
-            modelBuilder.Entity("Notification", b =>
-                {
-                    b.HasOne("UserNotifications", null)
-                        .WithMany("Notifications")
-                        .HasForeignKey("UserNotificationsId");
-                });
-
-            modelBuilder.Entity("UserNotifications", b =>
-                {
-                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }

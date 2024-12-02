@@ -7,5 +7,5 @@ public class ExamResult
     public int ExamId { get; set; }
     public int UserId { get; set; } // Candidate UserId
     public int Score { get; set; }
-    public string ResultStatus { get; set; } // Passed, Failed
+    public string ResultStatus { get; set; } // Passed, Failed, Pending
 }

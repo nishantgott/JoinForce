@@ -23,5 +23,6 @@ namespace ArmyBackend.Data
         public DbSet<RecruitmentReport> RecruitmentReports { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PlatformAccess> PlatformAccesses { get; set; }
+        public DbSet<UserNotifications> UserNotifications { get; set; } 
     }
 }
