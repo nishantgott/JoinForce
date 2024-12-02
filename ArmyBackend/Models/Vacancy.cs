@@ -12,10 +12,11 @@ public class Vacancy
     public int PostedBy { get; set; } // Recruiter UserId
     public DateTime DatePosted { get; set; }
     public string Status { get; set; } // Open, Closed
-}
 
-//deadline
-//applied
-//JobDetails
-//experienceMin
-//experienceMax
+    // New properties
+    public DateTime Deadline { get; set; }  // Deadline for application
+    public int AppliedCount  { get; set; }  // Number of applications received
+    public string JobDetails { get; set; }  // Detailed description of the job
+    public int ExperienceMin { get; set; }  // Minimum experience required
+    public int ExperienceMax { get; set; }  // Maximum experience required
+}
