@@ -1,0 +1,6 @@
+@ArmyBackend_HostAddress = http://localhost:5113
+
+GET {{ArmyBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
