@@ -52,6 +52,11 @@ export class VacancyService {
     return this.http.put(`${this.apiUrl}/${id}`, vacancy, { headers });
   }
 
+  // Method to get exams by VacancyId
+  getExamsByVacancyId(vacancyId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.examUrl}/vacancy/${vacancyId}`);
+  }
+
   // Method to delete a vacancy by ID
   deleteVacancy(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);

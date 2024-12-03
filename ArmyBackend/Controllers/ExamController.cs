@@ -1,5 +1,6 @@
 using ArmyBackend.Repositories; // For IExamRepository
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace ArmyBackend.Controllers
             var exams = await _examRepository.GetAllExamsAsync();
             return Ok(exams);
         }
+
 
         // Get exam by ID
         [HttpGet("{id}")]

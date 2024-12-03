@@ -8,6 +8,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { VacancylistComponent } from './pages/vacancylist/vacancylist.component';
 import { ApplicationlistComponent } from './pages/applicationlist/applicationlist.component';
 import { OfferslistComponent } from './pages/offerslist/offerslist.component';
+import { ApplicationReviewComponent } from './pages/application-review/application-review.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -18,4 +19,5 @@ export const routes: Routes = [
     { path: 'vacancy-list', component: VacancylistComponent },
     { path: 'application-list', component: ApplicationlistComponent },
     { path: 'offer-list', component: OfferslistComponent },
+    { path: 'application-review/:id', component: ApplicationReviewComponent },
 ];
