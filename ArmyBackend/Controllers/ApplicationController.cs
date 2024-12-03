@@ -78,7 +78,22 @@ namespace ArmyBackend.Controllers
             _applicationRepository.DeleteApplication(id);
             await _applicationRepository.SaveChangesAsync();
 
-            return NoContent();
+            return 
+            
+            NoContent();
+        }
+
+        [HttpGet("exists")]
+        public async Task<IActionResult> CheckApplicationExists([FromQuery] int userId, [FromQuery] int vacancyId)
+        {
+            var applicationExists = await _applicationRepository.CheckApplicationExistsAsync(userId, vacancyId);
+
+            if (applicationExists)
+            {
+                return Ok(true); // If application exists, return true
+            }
+
+            return Ok(false); // If no application found, return false
         }
     }
 }

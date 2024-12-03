@@ -12,5 +12,7 @@ namespace ArmyBackend.Repositories
         void UpdateApplication(Application application); // Update an existing application
         void DeleteApplication(int id); // Delete an application by ID
         Task SaveChangesAsync(); // Save changes to the database
+        Task<bool> CheckApplicationExistsAsync(int userId, int vacancyId);
+
     }
 }

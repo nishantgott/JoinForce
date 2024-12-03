@@ -14,6 +14,13 @@ namespace ArmyBackend.Repositories
             _context = context;
         }
 
+        // Check if application exists by userId and vacancyId
+        public async Task<bool> CheckApplicationExistsAsync(int userId, int vacancyId)
+        {
+            return await _context.Applications
+                .AnyAsync(a => a.UserId == userId && a.VacancyId == vacancyId);
+        }
+
         // Retrieve all applications
         public async Task<IEnumerable<Application>> GetAllApplicationsAsync()
         {
