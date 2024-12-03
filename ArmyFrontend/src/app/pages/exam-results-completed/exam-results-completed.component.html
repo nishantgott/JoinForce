@@ -1,0 +1,51 @@
+<p>exam-results-completed works!</p>
+<div class="min-h-screen p-6">
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Exam Results</h1>
+
+        <div class="p-6">
+            <div class="flex justify-center space-x-12 text-2xl">
+                <a href="#" class="text-gray-700 hover:text-blue-500 ">Pending</a>
+
+                <a href="#"
+                    class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Completed</a>
+
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div *ngIf="loading" class="text-center text-lg text-gray-500">
+            Loading exam results...
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error" class="text-center text-red-500">
+            {{ error }}
+        </div>
+
+        <!-- Results List -->
+        <div *ngIf="!loading && !error">
+            <div *ngFor="let result of examResults"
+                class="mb-6 p-4 bg-white rounded-lg shadow-md border border-gray-200">
+
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">ExamResult: {{ result.examId }}</h3>
+
+                <div class="mb-4">
+                    <span class="text-sm text-gray-600">User ID:</span>
+                    <span class="text-lg font-medium">{{ result.userId }}</span>
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-sm text-gray-600">Current Score:</span>
+                    <span class="text-lg font-medium">{{ result.score }}</span>
+                </div>
+
+                <div class="mb-4">
+                    <span class="text-sm text-gray-600">Result Status:</span>
+                    <span class="text-lg font-medium">{{ result.resultStatus }}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
