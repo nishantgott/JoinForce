@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
+  getUserByUsername(username: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/username/${username}`);
+  }
+
   // Method to add a new user
   addUser(user: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

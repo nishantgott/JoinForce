@@ -158,4 +158,25 @@ public async Task<IActionResult> AddUserNotifications(int userId, [FromBody] Not
 
         return Ok("Notifications sent to all users.");
     }
+
+    [HttpPatch("mark-as-read/{notificationId}")]
+    public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
+    {
+        // Find the notification by its ID
+        var notification = await _context.Notifications
+            .FirstOrDefaultAsync(n => n.NotificationId == notificationId);
+
+        if (notification == null)
+        {
+            return NotFound("Notification not found.");
+        }
+
+        // Mark the notification as read
+        notification.ReadStatus = true;
+
+        // Save the changes to the database
+        await _context.SaveChangesAsync();
+
+        return Ok("Notification marked as read.");
+    }
 }

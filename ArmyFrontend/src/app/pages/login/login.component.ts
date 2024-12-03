@@ -23,8 +23,8 @@ export class LoginComponent {
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-        this.authService.storeToken(response.token);
-        // this.router.navigate(['/dashboard']);
+        this.authService.storeToken(response.token, this.loginData.username);
+        // this.router.navigate(['/dashboard']); 
       },
       error: (error) => {
         console.log(this.loginData);

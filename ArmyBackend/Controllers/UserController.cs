@@ -38,6 +38,15 @@ namespace ArmyBackend.Controllers
             return Ok(user);
         }
 
+        [HttpGet("username/{username}")]
+        public async Task<IActionResult> GetUserByUsername(string username)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            if (user == null) return NotFound();
+
+            return Ok(user);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
@@ -78,6 +87,7 @@ namespace ArmyBackend.Controllers
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -146,5 +156,7 @@ namespace ArmyBackend.Controllers
 
             return NoContent();
         }
+
     }
+
 }
