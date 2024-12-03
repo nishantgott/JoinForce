@@ -14,6 +14,12 @@ namespace ArmyBackend.Repositories
             _context = context;
         }
 
+        public async Task<CandidateProfile> GetProfileByActualUserIdAsync(int actualUserId)
+        {
+            return await _context.CandidateProfiles
+                                .FirstOrDefaultAsync(profile => profile.ActualUserId == actualUserId);
+        }
+
         // Retrieve all candidate profiles
         public async Task<IEnumerable<CandidateProfile>> GetAllProfilesAsync()
         {

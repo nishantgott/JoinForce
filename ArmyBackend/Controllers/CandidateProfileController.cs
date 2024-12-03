@@ -76,5 +76,15 @@ namespace ArmyBackend.Controllers
 
             return NoContent();
         }
+
+        // Get profile by ActualUserId
+        [HttpGet("by-actualuserid/{actualUserId}")]
+        public async Task<IActionResult> GetProfileByActualUserId(int actualUserId)
+        {
+            var profile = await _candidateProfileRepository.GetProfileByActualUserIdAsync(actualUserId);
+            if (profile == null) return NotFound();
+
+            return Ok(profile);
+        }
     }
 }
