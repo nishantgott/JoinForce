@@ -11,5 +11,6 @@ namespace ArmyBackend.Repositories
         void UpdateProfile(CandidateProfile profile); // Update an existing profile
         void DeleteProfile(int userId); // Delete a profile by UserId
         Task SaveChangesAsync(); // Save changes to the database
+        Task<CandidateProfile> GetProfileByActualUserIdAsync(int actualUserId);  //Retrieve profile by actual user id
     }
 }

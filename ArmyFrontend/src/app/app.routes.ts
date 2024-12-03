@@ -11,6 +11,7 @@ import { OfferslistComponent } from './pages/offerslist/offerslist.component';
 import { ApplicationReviewComponent } from './pages/application-review/application-review.component';
 import { ExamResultsChangeComponent } from './pages/exam-results-change/exam-results-change.component';
 import { ExamResultsCompletedComponent } from './pages/exam-results-completed/exam-results-completed.component';
+import { CandidateProfileComponent } from './pages/candidate-profile/candidate-profile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -24,4 +25,5 @@ export const routes: Routes = [
     { path: 'application-review/:id', component: ApplicationReviewComponent },
     { path: 'exam-results-change', component: ExamResultsChangeComponent },
     { path: 'exam-results-completed', component: ExamResultsCompletedComponent },
+    { path: 'candidate-profile/:id', component: CandidateProfileComponent },
 ];

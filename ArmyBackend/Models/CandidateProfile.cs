@@ -10,4 +10,6 @@ public class CandidateProfile
     public string Experience { get; set; }
     public string ProfilePicture { get; set; } // URL to profile picture
     public string MilitaryBackground { get; set; }
+    public string About { get; set; }
+    public int? ActualUserId { get; set; }
 }
