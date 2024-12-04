@@ -17,7 +17,8 @@ import { CandidateProfileListComponent } from './pages/candidate-profile-list/ca
 import { TestExamListComponent } from './pages/test-exam-list/test-exam-list.component';
 import { TestExamList2Component } from './pages/test-exam-list2/test-exam-list2.component';
 import { CreateEvaluationReportComponent } from './pages/create-evaluation-report/create-evaluation-report.component';
-import { EvaluationReportListComponent } from './evaluation-report-list/evaluation-report-list.component';
+import { EvaluationReportListComponent } from './pages/evaluation-report-list/evaluation-report-list.component';
+
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },

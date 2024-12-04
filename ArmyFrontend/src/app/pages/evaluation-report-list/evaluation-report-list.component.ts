@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { EvaluationReport, EvaluationReportService } from '../services/evaluation-report.service';
+
 import { CommonModule, DatePipe } from '@angular/common';
+import { EvaluationReport, EvaluationReportService } from '../../services/evaluation-report.service';
 
 @Component({
   selector: 'app-evaluation-report-list',
