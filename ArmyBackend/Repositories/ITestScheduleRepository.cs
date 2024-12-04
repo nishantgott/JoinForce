@@ -7,6 +7,7 @@ namespace ArmyBackend.Repositories
     {
         Task<IEnumerable<TestSchedule>> GetAllTestSchedulesAsync(); // Retrieve all test schedules
         Task<TestSchedule?> GetTestScheduleByIdAsync(int testId); // Retrieve a test schedule by ID
+        Task<IEnumerable<TestSchedule>> GetTestScheduleByUserIdAsync(int userId); // Get test schedules for a specific user
         Task<IEnumerable<TestSchedule>> GetTestSchedulesByApplicationIdAsync(int applicationId); // Get test schedules for a specific application
         Task AddTestScheduleAsync(TestSchedule testSchedule); // Add a new test schedule
         void UpdateTestSchedule(TestSchedule testSchedule); // Update an existing test schedule

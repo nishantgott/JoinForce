@@ -42,6 +42,8 @@ export class ApplicationReviewComponent implements OnInit {
 
               // Fetch the related exam based on the vacancy
               this.vacancyService.getExamsByVacancyId(vacancy.vacancyId).subscribe((exams) => {
+                console.log('doo');
+                console.log(exams);
                 if (exams && exams.length > 0) {
                   this.exam = exams[0];  // Assuming there's only one exam per vacancy
                 } else {

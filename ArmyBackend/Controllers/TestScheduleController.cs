@@ -24,6 +24,19 @@ namespace ArmyBackend.Controllers
             return Ok(schedules);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetTestSchedulesByUserId(int userId)
+        {
+            var testSchedules = await _testScheduleRepository.GetTestScheduleByUserIdAsync(userId);
+            
+            if (testSchedules == null || !testSchedules.Any())
+            {
+                return NotFound("No test schedules found for this user.");
+            }
+
+            return Ok(testSchedules);
+        }
+
         // Get test schedule by ID
         [HttpGet("{testId}")]
         public async Task<IActionResult> GetTestScheduleById(int testId)
