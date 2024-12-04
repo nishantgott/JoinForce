@@ -16,6 +16,8 @@ import { CandidateCardComponent } from './candidate-card/candidate-card.componen
 import { CandidateProfileListComponent } from './pages/candidate-profile-list/candidate-profile-list.component';
 import { TestExamListComponent } from './pages/test-exam-list/test-exam-list.component';
 import { TestExamList2Component } from './pages/test-exam-list2/test-exam-list2.component';
+import { CreateEvaluationReportComponent } from './pages/create-evaluation-report/create-evaluation-report.component';
+import { EvaluationReportListComponent } from './evaluation-report-list/evaluation-report-list.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -32,5 +34,7 @@ export const routes: Routes = [
     { path: 'candidate-profile/:id', component: CandidateProfileComponent },
     { path: 'candidate-profile-list', component: CandidateProfileListComponent },
     { path: 'test-exam-list', component: TestExamListComponent },
-    { path: 'test-exam-list2', component: TestExamList2Component }
+    { path: 'test-exam-list2', component: TestExamList2Component },
+    { path: 'create-evaluation-report', component: CreateEvaluationReportComponent },
+    { path: 'evaluation-report-list', component: EvaluationReportListComponent },
 ];

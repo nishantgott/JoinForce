@@ -1,0 +1,82 @@
+<div class="min-h-screen p-6">
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Evaluation Reports</h1>
+
+        <div class="p-6">
+            <div class="flex justify-center space-x-12 text-2xl">
+                <a href="#"
+                    class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Pending</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Completed</a>
+            </div>
+        </div>
+
+        <!-- Results List -->
+        <div *ngFor="let testSchedule of testSchedules"
+            class="mb-6 p-4 bg-white rounded-lg shadow-md border border-gray-200">
+
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Test for
+                <span class="border border-gray-200 rounded-lg p-2 bg-gray-300">application
+                    {{testSchedule.applicationId}}</span>
+            </h3>
+
+            <div class="mb-4">
+                <span class="text-sm text-gray-600">User ID:</span>
+                <span class="text-lg font-medium">{{testSchedule.userId}}</span>
+            </div>
+
+            <div class="mb-4">
+                <span class="text-sm text-gray-600">Test type:</span>
+                <span class="text-lg font-medium">{{testSchedule.testType}}</span>
+            </div>
+
+            <div class="mb-4">
+                <span class="text-sm text-gray-600">Date: </span>
+                <span class="text-lg font-medium">{{testSchedule.date | date:'longDate'}}</span>
+            </div>
+
+            <div class="mb-4">
+                <span class="text-sm text-gray-600">Location: </span>
+                <span class="text-lg font-medium">{{testSchedule.location}}</span>
+            </div>
+
+            <div class="mb-4">
+                <span class="text-sm text-gray-600">Status: </span>
+                <span class="text-lg font-medium">{{testSchedule.status}}</span>
+            </div>
+
+            <!-- Dropdown for Performance Metrics (Pass/Fail) -->
+            <div class="mb-4">
+                <label for="performanceMetrics-{{testSchedule.applicationId}}"
+                    class="block text-sm font-medium text-gray-700">Performance Metrics</label>
+                <select id="performanceMetrics-{{testSchedule.applicationId}}" [(ngModel)]="performanceMetrics"
+                    class="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="comments-{{testSchedule.applicationId}}"
+                    class="block text-sm font-medium text-gray-700">Comments</label>
+                <textarea id="comments-{{testSchedule.applicationId}}" [(ngModel)]="comments"
+                    class="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter comments"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="score-{{testSchedule.applicationId}}"
+                    class="block text-sm font-medium text-gray-700">Score</label>
+                <input type="number" id="score-{{testSchedule.applicationId}}" [(ngModel)]="score"
+                    class="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter score" />
+            </div>
+
+            <div class="flex justify-between">
+                <button (click)="createEvaluationReport(testSchedule)"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Create Evaluation Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
