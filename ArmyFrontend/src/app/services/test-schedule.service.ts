@@ -8,7 +8,7 @@ export interface TestSchedule {
   testType: string;
   date: string;  // You can use Date type, but API returns string
   location: string;
-  status: string;
+  status: string;  //Pending, Pass, Fail
   userId: number;
 }
 
