@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-6 py-8 px-4 rounded-lg bg-white shadow-lg border border-gray-300 max-w-sm mx-auto">
+    <!-- Candidate ID -->
+    <div class="text-lg font-semibold text-gray-800">
+        ID: <span class="text-blue-600">{{candidateProfile?.actualUserId}}</span>
+    </div>
+
+    <!-- Profile Image -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0uRIuWY7dusryxOa0EqoVGKw-oXKnaNyPQ&s"
+        alt="Candidate Profile" class="w-40 h-40 object-cover border-4 border-blue-500 rounded-full mx-auto shadow-md">
+
+    <!-- Candidate Full Name -->
+    <div class="mt-4 text-2xl font-bold text-gray-800 text-center">
+        {{candidateProfile?.fullName}}
+    </div>
+
+    <!-- Candidate Date of Birth -->
+    <div class="text-sm text-gray-600 text-center">
+        <strong>DOB:</strong> {{candidateProfile?.dob | date}}
+    </div>
+
+    <!-- Candidate Experience -->
+    <div class="text-sm text-gray-600 text-center">
+        <strong>Experience:</strong> {{candidateProfile?.experience}}
+    </div>
+
+</div>
