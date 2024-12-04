@@ -56,17 +56,32 @@ namespace ArmyBackend.Controllers
         [HttpPut("{reportId}")]
         public async Task<IActionResult> UpdateReport(int reportId, [FromBody] EvaluationReport updatedReport)
         {
+            // Retrieve the existing report
             var report = await _evaluationReportRepository.GetReportByIdAsync(reportId);
+            
+            // If the report doesn't exist, return NotFound
             if (report == null) return NotFound();
 
+            // Update the fields
             report.PerformanceMetrics = updatedReport.PerformanceMetrics;
             report.Comments = updatedReport.Comments;
+            
+            // Add updates for the new fields
+            report.Score = updatedReport.Score;
+            report.TestDate = updatedReport.TestDate;
+            report.TestType = updatedReport.TestType;
+            report.ApplicationId = updatedReport.ApplicationId;
 
+            // Update the report in the repository
             _evaluationReportRepository.UpdateReport(report);
+            
+            // Save changes asynchronously
             await _evaluationReportRepository.SaveChangesAsync();
 
+            // Return NoContent (successful update)
             return NoContent();
         }
+
 
         // Delete an evaluation report
         [HttpDelete("{reportId}")]
