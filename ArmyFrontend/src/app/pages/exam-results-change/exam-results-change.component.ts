@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
+import { TestScheduleService } from '../../services/test-schedule.service';
 
 @Component({
   selector: 'app-exam-results-change',
@@ -20,7 +21,8 @@ export class ExamResultsChangeComponent {
   constructor(
     private examResultService: ExamResultService,
     private examService: ExamService,
-    private applicationService: ApplicationService
+    private applicationService: ApplicationService,
+    private testScheduleService: TestScheduleService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class ExamResultsChangeComponent {
     this.examResultService.getAllExamResults().subscribe(
       (results) => {
         this.examResults = results;
-        this.examResults = this.examResults.filter(result => result.resultStatus != 'Pending');
+        this.examResults = this.examResults.filter(result => result.resultStatus === 'Pending');
         this.loading = false;
       },
       (err) => {
@@ -107,6 +109,48 @@ export class ExamResultsChangeComponent {
                   alert('Failed to update application status.');
                 }
               );
+
+              //here use the applicationId to create two test schedules
+              if (status === 'Shortlisted')
+                this.testScheduleService.createTestSchedule({
+                  testId: 0,
+                  applicationId: applicationId,
+                  testType: 'Physical',
+                  date: '2024-12-01T21:10:01.335Z',
+                  location: 'Physical Location',
+                  status: 'Pending',
+                  userId: userId
+                }).subscribe(
+                  (res) => {
+                    console.log('Test schedule created successfully!');
+                    console.log(res)
+                    alert('Test schedule created successfully!');
+                  },
+                  (error) => {
+                    console.error('Error creating test schedule:', error);
+                    alert('Failed to create test schedule.');
+                  }
+                );
+              if (status === 'Shortlisted')
+                this.testScheduleService.createTestSchedule({
+                  testId: 0,
+                  applicationId: applicationId,
+                  testType: 'Medical',
+                  date: '2024-12-01T21:10:01.335Z',
+                  location: 'Physical Location',
+                  status: 'Pending',
+                  userId: userId
+                }).subscribe(
+                  (res) => {
+                    console.log('Test schedule created successfully!');
+                    console.log(res)
+                    alert('Test schedule created successfully!');
+                  },
+                  (error) => {
+                    console.error('Error creating test schedule:', error);
+                    alert('Failed to create test schedule.');
+                  }
+                );
             } else {
               console.error('No application found with the matching vacancyId');
               alert('No matching application found for this exam.');

@@ -21,6 +21,14 @@ namespace ArmyBackend.Repositories
             return await _context.TestSchedules.ToListAsync();
         }
 
+        // Retrieve test schedules by UserId
+        public async Task<IEnumerable<TestSchedule>> GetTestScheduleByUserIdAsync(int userId)
+        {
+            return await _context.TestSchedules
+                .Where(ts => ts.UserId == userId) // Filter by UserId
+                .ToListAsync();
+        }
+
         // Retrieve a test schedule by ID
         public async Task<TestSchedule?> GetTestScheduleByIdAsync(int testId)
         {
