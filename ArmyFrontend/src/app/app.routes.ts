@@ -20,6 +20,8 @@ import { CreateEvaluationReportComponent } from './pages/create-evaluation-repor
 import { EvaluationReportListComponent } from './pages/evaluation-report-list/evaluation-report-list.component';
 import { ResultsListComponent } from './pages/results-list/results-list.component';
 import { ResultsListExamComponent } from './pages/results-list-exam/results-list-exam.component';
+import { ApplicationReviewListComponent } from './pages/application-review-list/application-review-list.component';
+import { ApplicationReviewListCompletedComponent } from './pages/application-review-list-completed/application-review-list-completed.component';
 
 
 export const routes: Routes = [
@@ -42,4 +44,6 @@ export const routes: Routes = [
     { path: 'evaluation-report-list', component: EvaluationReportListComponent },
     { path: 'results-list', component: ResultsListComponent },
     { path: 'results-list-exam', component: ResultsListExamComponent },
+    { path: 'application-review-list', component: ApplicationReviewListComponent },
+    { path: 'application-review-list-completed', component: ApplicationReviewListCompletedComponent },
 ];
