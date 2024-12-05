@@ -1,0 +1,49 @@
+<header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
+    <!-- Logo Section -->
+    <div class="flex items-center space-x-8">
+        <div class="flex items-center">
+            <img src="/military-tank.svg" alt="Military Tank Logo" class="w-20" />
+        </div>
+        <input type="text" placeholder="Search Opportunities"
+            class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex items-center ml-6 space-x-8 text-gray-700">
+        <a href="#" class="hover:underline">Jobs</a>
+        <a href="#" class="hover:underline">Results</a>
+        <a href="#" class="hover:underline">Notifications</a>
+
+        <!-- Practice Link with Dropdown -->
+        <div class="relative border-2 border-gray-300 rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
+            (click)="toggleDropdown($event)">
+            <div class="flex">
+                <a href="#">
+                    {{user.username}}
+                </a>
+
+                <!-- Dropdown Toggle Icon -->
+                <span class="ml-2 mt-2" [ngClass]="{'rotate-180 mb-2': isDropdownVisible}">
+                    <!-- Icon for when the dropdown is open -->
+                    <svg *ngIf="isDropdownVisible" class="MuiSvgIcon-root jss17553 jss17554 w-3" focusable="false"
+                        viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
+                    </svg>
+                    <!-- Icon for when the dropdown is closed -->
+                    <svg *ngIf="!isDropdownVisible" class="MuiSvgIcon-root jss17553 w-3" focusable="false"
+                        viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
+                    </svg>
+                </span>
+
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div *ngIf="isDropdownVisible"
+                class="absolute right-0 mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-lg w-40 text-sm z-10">
+                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log Out</a>
+            </div>
+        </div>
+    </nav>
+</header>

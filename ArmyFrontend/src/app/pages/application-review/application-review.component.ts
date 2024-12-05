@@ -5,11 +5,12 @@ import { VacancyService } from '../../services/vacancy.service';
 import { ExamResultService } from '../../services/exam-result.service';
 import { DatePipe } from '@angular/common';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { CandidateCardComponent } from "../../candidate-card/candidate-card.component";
 
 @Component({
   selector: 'app-application-review',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CandidateCardComponent],
   templateUrl: './application-review.component.html',
   styleUrls: ['./application-review.component.css']
 })
@@ -18,6 +19,7 @@ export class ApplicationReviewComponent implements OnInit {
   vacancy: any = {};      // Initialize as an empty object
   exam: any = null;       // Initialize to null
   applicationId: number = 0;
+  userId: number = 0;
   notification: UserNotification = {
     notificationId: 0,
     userId: 1,
@@ -43,10 +45,6 @@ export class ApplicationReviewComponent implements OnInit {
     }
   }
 
-
-
-
-
   constructor(
     private applicationService: ApplicationService,
     private vacancyService: VacancyService,
@@ -64,6 +62,7 @@ export class ApplicationReviewComponent implements OnInit {
         if (app) {
           this.application = app;
           this.notification.userId = this.application.userId;
+          this.userId = this.application.userId;
 
           // After fetching the application, fetch the related vacancy
           this.vacancyService.getVacancyById(app.vacancyId).subscribe((vacancy) => {

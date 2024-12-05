@@ -1,25 +1,6 @@
-<header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
-    <!-- Logo Section -->
-    <div class="flex items-center space-x-8">
-        <div class="flex items-center">
-            <img src="/military-tank.svg" alt="Military Tank Logo" class="w-20" />
-        </div>
-        <input type="text" placeholder="Search Opportunities"
-            class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
-    </div>
-
-
-    <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-gray-700">
-        <a href="#" class="hover:underline">Internships</a>
-        <a href="#" class="hover:underline">Jobs</a>
-        <a href="#" class="hover:underline">Compete</a>
-        <a href="#" class="hover:underline">Mentorship</a>
-        <a href="#" class="hover:underline">Courses</a>
-        <a href="#" class="hover:underline">Practice</a>
-        <button class="px-4 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600">
-            Login
-        </button>
-    </nav>
-
-</header>
+<app-header-candidate *ngIf="user?.role === 'Candidate'"></app-header-candidate>
+<app-header-recruiter *ngIf="user?.role === 'Recruiter'"></app-header-recruiter>
+<app-header-medical-officer *ngIf="user?.role === 'MedicalOfficer'"></app-header-medical-officer>
+<app-header-examiner *ngIf="user?.role === 'Examiner'"></app-header-examiner>
+<app-header-admin *ngIf="user?.role === 'Admin'"></app-header-admin>
+<app-header-logged-out *ngIf="!user"></app-header-logged-out>
