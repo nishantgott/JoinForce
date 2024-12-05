@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { TestSchedule, TestScheduleService } from '../../services/test-schedule.service';
 import { ExamService } from '../../services/exam.service';
 import { ExamResultService } from '../../services/exam-result.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-test-exam-list2',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './test-exam-list2.component.html',
   styleUrl: './test-exam-list2.component.css'
 })

@@ -1,13 +1,14 @@
-<div class="p-6">
+<div *ngIf="user.role=='Candidate'" class="p-6">
     <div class="flex justify-center space-x-12 text-2xl">
         <!-- Vacancies - Different color and underlined -->
-        <a href="#" class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Vacancies</a>
+        <a [routerLink]="['/vacancy-list']"
+            class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Vacancies</a>
 
         <!-- Applications -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Applications</a>
+        <a [routerLink]="['/application-list']" class="text-gray-700 hover:text-blue-500">Applications</a>
 
         <!-- Offers -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Offers</a>
+        <a [routerLink]="['/offer-list']" class="text-gray-700 hover:text-blue-500">Offers</a>
     </div>
 </div>
 
@@ -31,7 +32,9 @@
                 </g>
             </svg>
             <div class="flex flex-col gap-1 pb-2">
-                <h2 class="text-2xl font-semibold text-gray-800">{{vacancy.title}}</h2>
+                <h2 [routerLink]="['/vacancy',vacancy.vacancyId]"
+                    class="text-2xl font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">{{vacancy.title}}
+                </h2>
                 <h2 class="text-xl text-gray-800">{{vacancy.role}}</h2>
             </div>
         </div>
@@ -62,7 +65,8 @@
                 Registrations closed on {{vacancy.deadline | date: 'longDate'}} - {{vacancy.deadline | date:
                 'shortTime'}}
             </div>
-            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
+            <button [routerLink]="['/vacancy', vacancy.vacancyId]"
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
                 View More
             </button>
         </div>

@@ -5,11 +5,12 @@ import { TestSchedule } from '../../services/test-schedule.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-evaluation-report',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './create-evaluation-report.component.html',
   styleUrls: ['./create-evaluation-report.component.css']
 })

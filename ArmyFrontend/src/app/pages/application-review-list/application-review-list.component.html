@@ -4,10 +4,11 @@
 
         <div class="p-6">
             <div class="flex justify-center space-x-12 text-2xl">
-                <a href="#"
+                <a [routerLink]="['/application-review-list']"
                     class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Pending</a>
 
-                <a href="#" class="text-gray-700 hover:text-blue-500">Reviewed</a>
+                <a [routerLink]="['/application-review-list-completed']"
+                    class="text-gray-700 hover:text-blue-500">Reviewed</a>
 
             </div>
         </div>
@@ -41,11 +42,13 @@
             </div>
 
             <div class="flex justify-between">
-                <button class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
+                <button [routerLink]="['/vacancy',application.vacancyId]"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
                     View vacancy
                 </button>
 
-                <button class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
+                <button [routerLink]="['/application-review',application.applicationId]"
+                    class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
                     Review
                 </button>
             </div>

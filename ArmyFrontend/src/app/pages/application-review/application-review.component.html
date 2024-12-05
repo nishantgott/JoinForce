@@ -57,7 +57,8 @@
 
         <!-- Box Actions -->
         <div class="flex justify-between space-x-4">
-            <button class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
+            <button [routerLink]="['/vacancy',application.vacancyId]"
+                class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
                 View vacancy
             </button>
             <div class="flex justify-between space-x-6">

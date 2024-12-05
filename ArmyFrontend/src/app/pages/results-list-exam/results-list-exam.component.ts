@@ -5,11 +5,12 @@ import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-results-list-exam',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './results-list-exam.component.html',
   styleUrls: ['./results-list-exam.component.css']
 })

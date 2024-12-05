@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Application, ApplicationService } from '../../services/application.service';
 import { VacancyService } from '../../services/vacancy.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-applicationlist',
   standalone: true,
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule, RouterModule],
   templateUrl: './applicationlist.component.html',
   styleUrls: ['./applicationlist.component.css']
 })

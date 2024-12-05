@@ -1,13 +1,14 @@
 <div class="p-6">
     <div class="flex justify-center space-x-12 text-2xl">
         <!-- Vacancies - Different color and underlined -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Vacancies</a>
+        <a [routerLink]="['/vacancy-list']" class="text-gray-700 hover:text-blue-500">Vacancies</a>
 
         <!-- Applications -->
-        <a href="#" class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Applications</a>
+        <a [routerLink]="['/application-list']"
+            class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Applications</a>
 
         <!-- Offers -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Offers</a>
+        <a [routerLink]="['/offer-list']" class="text-gray-700 hover:text-blue-500">Offers</a>
     </div>
 </div>
 
@@ -30,7 +31,9 @@
                 </g>
             </svg>
             <div class="flex flex-col gap-1 pb-2">
-                <h2 class="text-2xl font-semibold text-gray-800">{{ vacancy.title }}</h2>
+                <h2 [routerLink]="['/vacancy',vacancy.vacancyId]"
+                    class="text-2xl font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">{{ vacancy.title }}
+                </h2>
                 <h2 class="text-xl text-gray-800">{{ vacancy.role }}</h2>
             </div>
         </div>
@@ -38,6 +41,7 @@
         <!-- Box Content -->
         <div class="text-xl text-gray-800 mb-4 border-b border-gray-300 py-2 flex justify-between">
             <div class="flex flex-col justify-between">
+                <!-- <h1>Application ID: <span class="font-semibold">{{ ap }}</span></h1> -->
                 <h1>Location: <span class="font-semibold">{{ vacancy.location }}</span></h1>
                 <h1>Experience: <span class="font-semibold">{{ vacancy.experienceMin }}+</span></h1>
                 <h1>Salary: <span class="font-semibold">{{ vacancy.salary }}</span></h1>

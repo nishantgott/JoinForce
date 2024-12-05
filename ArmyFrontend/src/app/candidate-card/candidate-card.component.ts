@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CandidateProfile, CandidateProfileService } from '../services/candidate-profile.service';
 import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-candidate-card',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, RouterModule],
   templateUrl: './candidate-card.component.html',
   styleUrl: './candidate-card.component.css'
 })

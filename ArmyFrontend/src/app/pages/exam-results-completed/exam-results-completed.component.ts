@@ -3,11 +3,12 @@ import { ExamResultService } from '../../services/exam-result.service';
 import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-exam-results-completed',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './exam-results-completed.component.html',
   styleUrl: './exam-results-completed.component.css'
 })

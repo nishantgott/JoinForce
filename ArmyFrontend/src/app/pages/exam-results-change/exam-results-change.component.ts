@@ -6,11 +6,12 @@ import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { TestScheduleService } from '../../services/test-schedule.service';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-exam-results-change',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './exam-results-change.component.html',
   styleUrls: ['./exam-results-change.component.css']
 })
@@ -97,6 +98,8 @@ export class ExamResultsChangeComponent {
 
         // After updating the exam result, update the application status
         this.updateApplicationStatus(examResult, status);
+        this.examResults = this.examResults.filter(result => result.resultStatus === 'Pending');
+
       },
       (error) => {
         console.error('Error updating exam result:', error);

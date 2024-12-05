@@ -5,8 +5,10 @@
     </div>
 
     <!-- Profile Image -->
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0uRIuWY7dusryxOa0EqoVGKw-oXKnaNyPQ&s"
-        alt="Candidate Profile" class="w-40 h-40 object-cover border-4 border-blue-500 rounded-full mx-auto shadow-md">
+    <img [routerLink]="['/candidate-profile',candidateProfile?.actualUserId]"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0uRIuWY7dusryxOa0EqoVGKw-oXKnaNyPQ&s"
+        alt="Candidate Profile"
+        class="w-40 h-40 object-cover border-4 border-blue-500 rounded-full mx-auto shadow-md hover:cursor-pointer">
 
     <!-- Candidate Full Name -->
     <div class="mt-4 text-2xl font-bold text-gray-800 text-center">

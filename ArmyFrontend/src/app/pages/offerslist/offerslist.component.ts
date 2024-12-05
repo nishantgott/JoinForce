@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Application, ApplicationService } from '../../services/application.service';
 import { VacancyService } from '../../services/vacancy.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-offerslist',
   standalone: true,
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule, RouterModule],
   templateUrl: './offerslist.component.html',
   styleUrl: './offerslist.component.css'
 })

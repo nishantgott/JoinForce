@@ -1,13 +1,14 @@
 <div class="p-6">
     <div class="flex justify-center space-x-12 text-2xl">
         <!-- Vacancies - Different color and underlined -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Vacancies</a>
+        <a [routerLink]="['/vacancy-list']" class="text-gray-700 hover:text-blue-500">Vacancies</a>
 
         <!-- Applications -->
-        <a href="#" class="text-gray-700 hover:text-blue-500">Applications</a>
+        <a [routerLink]="['/application-list']" class="text-gray-700 hover:text-blue-500">Applications</a>
 
         <!-- Offers -->
-        <a href="#" class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Offers</a>
+        <a [routerLink]="['/offer-list']"
+            class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Offers</a>
     </div>
 </div>
 

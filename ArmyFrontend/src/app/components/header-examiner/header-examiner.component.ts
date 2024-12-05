@@ -1,16 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header-examiner',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header-examiner.component.html',
   styleUrl: './header-examiner.component.css'
 })
 export class HeaderExaminerComponent {
   isDropdownVisible: boolean = false;
   user: any;
+
+  constructor(private router: Router, private authService: AuthService) { }
+
+  logout(): void {
+    this.router.navigate(['/']).then(() => {
+      this.authService.logout();
+      this.user = null;
+      window.location.reload();
+    });
+  }
+
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {

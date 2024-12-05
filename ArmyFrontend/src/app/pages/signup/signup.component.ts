@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { CandidateProfileService, CandidateProfile } from '../../services/candidate-profile.service';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
@@ -40,7 +41,8 @@ export class SignupComponent {
   constructor(
     private userService: UserService,
     private candidateProfileService: CandidateProfileService,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    private router: Router
   ) {
     console.log('UserService and CandidateProfileService are injected successfully!');
   }
@@ -108,6 +110,7 @@ export class SignupComponent {
 
         // Now, create the candidate profile
         this.createCandidateProfile();
+        // this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error('Error adding user:', error);

@@ -20,7 +20,7 @@
         <!-- Login Button -->
         <div class="mb-4">
             <button (click)="onSubmit()"
-                class="w-full bg-gray-300 text-gray-600 py-2 rounded-md text-center font-medium cursor-not-allowed">
+                class="w-full bg-gray-300 text-gray-600 py-2 rounded-md text-center font-medium">
                 Login
             </button>
         </div>
@@ -29,7 +29,7 @@
         <div class="text-center">
             <p class="text-gray-700">
                 Don't have an account?
-                <a href="#" class="text-blue-500 font-medium">Sign up</a>
+                <a [routerLink]="['/signup']" class="text-blue-500 font-medium">Sign up</a>
             </p>
         </div>
     </div>

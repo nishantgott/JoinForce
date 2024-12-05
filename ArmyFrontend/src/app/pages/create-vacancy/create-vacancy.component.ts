@@ -4,11 +4,12 @@ import { HttpHeaders } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-vacancy',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './create-vacancy.component.html',
   styleUrl: './create-vacancy.component.css'
 })
@@ -51,7 +52,7 @@ export class CreateVacancyComponent implements OnInit {
 
 
 
-  constructor(private vacancyService: VacancyService, private userNotificationsService: UserNotificationsService) { }
+  constructor(private vacancyService: VacancyService, private userNotificationsService: UserNotificationsService, private router: Router) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -80,6 +81,7 @@ export class CreateVacancyComponent implements OnInit {
         console.log('Vacancy created successfully', response);
         this.notification.message = `Your vacancy(ID: ${response.vacancyId}) has been created.`;
         this.createAndSendNotification();
+        this.router.navigate(['/vacancy', response.vacancyId]);
       },
       (error) => {
         console.error('Error creating vacancy', error);

@@ -4,9 +4,9 @@
 
         <div class="p-6">
             <div class="flex justify-center space-x-12 text-2xl">
-                <a href="#" class="text-gray-700 hover:text-blue-500">Pending</a>
+                <a [routerLink]="['/application-review-list']" class="text-gray-700 hover:text-blue-500">Pending</a>
 
-                <a href="#"
+                <a [routerLink]="['application-review-list-completed']"
                     class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Reviewed</a>
 
             </div>
@@ -20,7 +20,7 @@
             <div class="flex justify-between">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Application ID: {{ application.applicationId }}
                 </h3>
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Status: {{ application.applicationStatus }}</h3>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Reviewed </h3>
 
             </div>
             <div class="mb-4">
@@ -41,14 +41,14 @@
             </div>
 
             <div class="flex justify-between">
-                <button class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
+                <button [routerLink]="['/vacancy',application.vacancyId]"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none">
                     View vacancy
                 </button>
 
-                <button disabled
-                    class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none disabled">
-                    Reviewed
-                </button>
+                <h1 class="px-4 py-2 font-bold text-2xl text-green-700 rounded-lg focus:outline-none ">
+                    Status: {{application.applicationStatus}}
+                </h1>
             </div>
 
         </div>

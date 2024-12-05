@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { ApplicationService } from '../../services/application.service';
 import { VacancyService } from '../../services/vacancy.service';
 import { ExamResultService } from '../../services/exam-result.service';
@@ -10,7 +10,7 @@ import { CandidateCardComponent } from "../../candidate-card/candidate-card.comp
 @Component({
   selector: 'app-application-review',
   standalone: true,
-  imports: [DatePipe, CandidateCardComponent],
+  imports: [DatePipe, CandidateCardComponent, RouterModule],
   templateUrl: './application-review.component.html',
   styleUrls: ['./application-review.component.css']
 })
@@ -50,7 +50,8 @@ export class ApplicationReviewComponent implements OnInit {
     private vacancyService: VacancyService,
     private examResultService: ExamResultService,
     private route: ActivatedRoute,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -101,6 +102,7 @@ export class ApplicationReviewComponent implements OnInit {
   rejectApplication(): void {
     if (this.application?.applicationStatus !== 'Submitted') {
       alert('Only applications with the status "Submitted" can be accepted.');
+      this.router.navigate(['/application-review-list-completed']);
       return; // Stop further execution
     }
     if (this.application?.applicationId) {
@@ -116,6 +118,7 @@ export class ApplicationReviewComponent implements OnInit {
           this.createAndSendNotification();
           alert('Application has been rejected successfully!');
           this.application.applicationStatus = 'Rejected';  // Update the UI
+          this.router.navigate(['/application-review-list-completed']);
         },
         (error) => {
           console.error('Error rejecting application:', error);
@@ -128,6 +131,7 @@ export class ApplicationReviewComponent implements OnInit {
   acceptApplication(): void {
     if (this.application?.applicationStatus !== 'Submitted') {
       alert('Only applications with the status "Submitted" can be accepted.');
+
       return; // Stop further execution
     }
     // console.log('checking accept');
@@ -160,6 +164,8 @@ export class ApplicationReviewComponent implements OnInit {
               console.log('something');
               alert('Application has been reviewed and exam result created!');
               this.application.applicationStatus = 'Reviewed';  // Update the UI
+              this.router.navigate(['/application-review-list-completed']);
+
             },
             (error) => {
               console.error('Error creating exam result:', error);

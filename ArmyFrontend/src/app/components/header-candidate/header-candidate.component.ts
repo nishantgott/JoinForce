@@ -1,16 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header-candidate',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header-candidate.component.html',
   styleUrl: './header-candidate.component.css'
 })
 export class HeaderCandidateComponent {
   isDropdownVisible: boolean = false;
   user: any;
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -20,6 +24,15 @@ export class HeaderCandidateComponent {
       }
     }
   }
+
+  logout(): void {
+    this.router.navigate(['/']).then(() => {
+      this.authService.logout();
+      this.user = null;
+      window.location.reload();
+    });
+  }
+
 
   // This will be used to listen for clicks outside the dropdown
   @ViewChild('practiceDropdown') practiceDropdown!: ElementRef;

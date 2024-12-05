@@ -2,7 +2,8 @@
     <!-- Logo Section -->
     <div class="flex items-center space-x-8">
         <div class="flex items-center">
-            <img src="/military-tank.svg" alt="Military Tank Logo" class="w-20" />
+            <img src="/military-tank.svg" [routerLink]="['/']" alt="Military Tank Logo"
+                class="w-20 hover:cursor-pointer" />
         </div>
         <input type="text" placeholder="Search Opportunities"
             class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -10,14 +11,14 @@
 
     <!-- Navigation Links -->
     <nav class="flex items-center ml-6 space-x-8 text-gray-700">
-        <a href="#" class="hover:underline">Evaluate Reports</a>
-        <a href="#" class="hover:underline">Notifications</a>
+        <a [routerLink]="['create-evaluation-report']" class="hover:underline">Evaluate Reports</a>
+        <a [routerLink]="['/notifications']" class="hover:underline">Notifications</a>
 
         <!-- Practice Link with Dropdown -->
         <div class="relative border-2 border-gray-300 rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
             (click)="toggleDropdown($event)">
             <div class="flex">
-                <a href="#">
+                <a>
                     {{user.username}}
                 </a>
 
@@ -40,8 +41,9 @@
             <!-- Dropdown Menu -->
             <div *ngIf="isDropdownVisible"
                 class="absolute right-0 mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-lg w-40 text-sm z-10">
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log Out</a>
+                <a [routerLink]="['candidate-profile', user.userId]"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                <a (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log Out</a>
             </div>
         </div>
     </nav>
