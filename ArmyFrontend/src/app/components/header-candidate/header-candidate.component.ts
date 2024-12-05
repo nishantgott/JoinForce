@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header-candidate',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header-candidate.component.html',
   styleUrl: './header-candidate.component.css'
 })
 export class HeaderCandidateComponent {
   isDropdownVisible: boolean = false;
   user: any;
+
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -24,6 +26,12 @@ export class HeaderCandidateComponent {
       }
     }
   }
+
+  searchTerm: string = '';
+  onSearch(): void {
+    this.router.navigate(['/search', this.searchTerm]);
+  }
+
 
   logout(): void {
     this.router.navigate(['/']).then(() => {

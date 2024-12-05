@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header-medical-officer',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header-medical-officer.component.html',
   styleUrl: './header-medical-officer.component.css'
 })
@@ -21,6 +22,11 @@ export class HeaderMedicalOfficerComponent {
       this.user = null;
       window.location.reload();
     });
+  }
+
+  searchTerm: string = '';
+  onSearch(): void {
+    this.router.navigate(['/search', this.searchTerm]);
   }
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
@@ -45,7 +45,6 @@ export class VacancyService {
     return exam;
   }
 
-
   // Method to update an existing vacancy
   updateVacancy(id: number, vacancy: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -60,5 +59,11 @@ export class VacancyService {
   // Method to delete a vacancy by ID
   deleteVacancy(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  // Method to get vacancies by search
+  searchVacancies(keyword: string): Observable<any[]> {
+    const params = new HttpParams().set('keyword', keyword);
+    return this.http.get<any[]>(`${this.apiUrl}/search`, { params });
   }
 }

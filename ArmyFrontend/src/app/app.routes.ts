@@ -22,6 +22,7 @@ import { ResultsListComponent } from './pages/results-list/results-list.componen
 import { ResultsListExamComponent } from './pages/results-list-exam/results-list-exam.component';
 import { ApplicationReviewListComponent } from './pages/application-review-list/application-review-list.component';
 import { ApplicationReviewListCompletedComponent } from './pages/application-review-list-completed/application-review-list-completed.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 export const routes: Routes = [
@@ -46,4 +47,6 @@ export const routes: Routes = [
     { path: 'results-list-exam', component: ResultsListExamComponent },
     { path: 'application-review-list', component: ApplicationReviewListComponent },
     { path: 'application-review-list-completed', component: ApplicationReviewListCompletedComponent },
+    { path: 'search', component: SearchComponent },
+    { path: 'search/:query', component: SearchComponent },
 ];

@@ -63,6 +63,31 @@ namespace ArmyBackend.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchVacancies([FromQuery] string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return BadRequest("Search keyword is required.");
+            }
+
+            var vacancies = await _vacancyRepository.GetAllVacanciesAsync();
+            
+            // Filtering vacancies based on keyword in Title, Role, or JobDetails
+            var filteredVacancies = vacancies.Where(v =>
+                v.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                v.Role.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                v.JobDetails.Contains(keyword, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+
+            if (!filteredVacancies.Any())
+            {
+                return NotFound("No vacancies found matching the search criteria.");
+            }
+
+            return Ok(filteredVacancies);
+        }
+
         // Delete a vacancy
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVacancy(int id)

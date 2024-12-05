@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header-admin',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header-admin.component.html',
   styleUrl: './header-admin.component.css'
 })
@@ -24,6 +25,10 @@ export class HeaderAdminComponent {
     });
   }
 
+  searchTerm: string = '';
+  onSearch(): void {
+    this.router.navigate(['/search', this.searchTerm]);
+  }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
