@@ -4,7 +4,7 @@ import { ExamResultService } from '../../services/exam-result.service';
 import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators'; // <-- Add this import for map operator
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-results-list-exam',

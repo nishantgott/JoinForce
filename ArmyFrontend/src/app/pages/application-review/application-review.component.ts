@@ -4,6 +4,7 @@ import { ApplicationService } from '../../services/application.service';
 import { VacancyService } from '../../services/vacancy.service';
 import { ExamResultService } from '../../services/exam-result.service';
 import { DatePipe } from '@angular/common';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-application-review',
@@ -17,12 +18,41 @@ export class ApplicationReviewComponent implements OnInit {
   vacancy: any = {};      // Initialize as an empty object
   exam: any = null;       // Initialize to null
   applicationId: number = 0;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    // Create the notification
+    if (this.notification.message.trim() !== '') {
+      // Call service to add the notification
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
+
+
+
+
 
   constructor(
     private applicationService: ApplicationService,
     private vacancyService: VacancyService,
     private examResultService: ExamResultService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userNotificationsService: UserNotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +63,7 @@ export class ApplicationReviewComponent implements OnInit {
       this.applicationService.getApplicationById(this.applicationId).subscribe((app) => {
         if (app) {
           this.application = app;
+          this.notification.userId = this.application.userId;
 
           // After fetching the application, fetch the related vacancy
           this.vacancyService.getVacancyById(app.vacancyId).subscribe((vacancy) => {
@@ -82,6 +113,8 @@ export class ApplicationReviewComponent implements OnInit {
       // Call service to update the application status to 'Rejected'
       this.applicationService.updateApplication(this.application.applicationId, updatedApplication).subscribe(
         () => {
+          this.notification.message = `Your application(${this.application.applicationId}) has been rejected. Please apply for other vacancies.`;
+          this.createAndSendNotification();
           alert('Application has been rejected successfully!');
           this.application.applicationStatus = 'Rejected';  // Update the UI
         },
@@ -118,6 +151,9 @@ export class ApplicationReviewComponent implements OnInit {
             score: 0,  // Default score
             resultStatus: 'Pending'  // Default result status
           };
+
+          this.notification.message = `Your application(${this.application.applicationId}) has been reviewed. You have an exam scheduled on ${this.exam.examDate}`;
+          this.createAndSendNotification();
 
           // Create ExamResult for the user
           this.examResultService.createExamResult(examResult).subscribe(

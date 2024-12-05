@@ -3,6 +3,7 @@ import { VacancyService } from '../../services/vacancy.service';
 import { HttpHeaders } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-create-vacancy',
@@ -21,13 +22,46 @@ export class CreateVacancyComponent implements OnInit {
     jobDetails: '',
     experienceMin: 0,
     experienceMax: 0,
-    deadline: ''
+    deadline: '',
+    postedBy: 1
   };
+  userId: number = 0;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    if (this.notification.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
 
-  constructor(private vacancyService: VacancyService) { }
+
+
+  constructor(private vacancyService: VacancyService, private userNotificationsService: UserNotificationsService) { }
 
   ngOnInit(): void {
-    // Initialization logic if any
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        this.userId = user.userId;
+        this.notification.userId = this.userId;
+      }
+    }
   }
 
   onSubmit(): void {
@@ -35,6 +69,7 @@ export class CreateVacancyComponent implements OnInit {
     this.vacancy.datePosted = new Date().toISOString();  // Current date
     this.vacancy.status = 'Open';  // Default status
     this.vacancy.appliedCount = 0;  // Initially 0 applied
+    this.vacancy.postedBy = this.userId;
 
     // Convert deadline to ISO string if not already
     this.vacancy.deadline = new Date(this.vacancy.deadline).toISOString();
@@ -43,6 +78,8 @@ export class CreateVacancyComponent implements OnInit {
     this.vacancyService.addVacancy(this.vacancy).subscribe(
       (response) => {
         console.log('Vacancy created successfully', response);
+        this.notification.message = `Your vacancy(ID: ${response.vacancyId}) has been created.`;
+        this.createAndSendNotification();
       },
       (error) => {
         console.error('Error creating vacancy', error);

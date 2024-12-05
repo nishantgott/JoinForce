@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Application, ApplicationService } from '../../services/application.service';
 import { DocumentVerification, DocumentVerificationService } from '../../services/document-verification.service';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-vacancy',
@@ -16,12 +17,57 @@ export class VacancyComponent implements OnInit {
   vacancy: any; // Variable to hold the vacancy data
   userId: number = 0;
   vacancyId: number = 0;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  notification2: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    if (this.notification.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
+  createAndSendNotification2(): void {
+    if (this.notification2.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification2.userId, this.notification2).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
 
   constructor(
     private vacancyService: VacancyService,
     private route: ActivatedRoute,
     private applicationService: ApplicationService,
-    private documentVerificationService: DocumentVerificationService
+    private documentVerificationService: DocumentVerificationService,
+    private userNotificationsService: UserNotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +120,16 @@ export class VacancyComponent implements OnInit {
           this.applicationService.createApplication(application).subscribe(
             (createdApplication) => {
               console.log('Application Created:', createdApplication);
+
+              // Send notification to candidate
+              this.notification.message = `You have successfully applied for ${this.vacancy.title}. Your application ID is ${createdApplication.applicationId}, has been sent for document review.`;
+              this.notification.userId = createdApplication.userId;
+              this.createAndSendNotification();
+
+              //Send notification to recruiter
+              this.notification2.message = `Candidate has applied for ${this.vacancy.title}. Their application ID is ${createdApplication.applicationId}`;
+              this.notification2.userId = this.vacancy.postedBy;
+              this.createAndSendNotification2();
 
               // Step 4: Create Document Verification for the created application
               const documentVerification: DocumentVerification = {

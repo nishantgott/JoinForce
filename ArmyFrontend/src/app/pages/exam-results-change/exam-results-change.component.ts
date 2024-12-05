@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { TestScheduleService } from '../../services/test-schedule.service';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-exam-results-change',
@@ -17,12 +18,39 @@ export class ExamResultsChangeComponent {
   examResults: any[] = [];
   loading: boolean = true;
   error: string | null = null;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    if (this.notification.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
+
+
+
+
 
   constructor(
     private examResultService: ExamResultService,
     private examService: ExamService,
     private applicationService: ApplicationService,
-    private testScheduleService: TestScheduleService
+    private testScheduleService: TestScheduleService,
+    private userNotificationsService: UserNotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -81,6 +109,8 @@ export class ExamResultsChangeComponent {
     const userId = examResult.userId;  // Get the userId from the exam result
     const examId = examResult.examId;  // Get the examId from the exam result
 
+    this.notification.userId = userId;
+
     // Step 1: Fetch the exam using the examId
     this.examService.getExamById(examId).subscribe(
       (exam) => {
@@ -110,6 +140,11 @@ export class ExamResultsChangeComponent {
                 }
               );
 
+              if (status === 'Rejected') {
+                this.notification.message = `Your application (${applicationId}) has been rejected. Please apply for other vacancies.`;
+                this.createAndSendNotification();
+              }
+
               //here use the applicationId to create two test schedules
               if (status === 'Shortlisted')
                 this.testScheduleService.createTestSchedule({
@@ -123,6 +158,8 @@ export class ExamResultsChangeComponent {
                 }).subscribe(
                   (res) => {
                     console.log('Test schedule created successfully!');
+                    this.notification.message = `Your application (${applicationId}) has been shortlisted. Please schedule your Physical and Medical tests.`;
+                    this.createAndSendNotification();
                     console.log(res)
                     alert('Test schedule created successfully!');
                   },

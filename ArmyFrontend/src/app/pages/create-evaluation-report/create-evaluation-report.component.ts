@@ -4,6 +4,7 @@ import { EvaluationReportService, EvaluationReport } from '../../services/evalua
 import { TestSchedule } from '../../services/test-schedule.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-create-evaluation-report',
@@ -18,10 +19,37 @@ export class CreateEvaluationReportComponent implements OnInit {
   comments: string = '';
   score: number | null = null;
   selectedTestSchedule: TestSchedule | null = null;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    if (this.notification.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
+
+
+
+
 
   constructor(
     private testScheduleService: TestScheduleService,
-    private evaluationReportService: EvaluationReportService
+    private evaluationReportService: EvaluationReportService,
+    private userNotificationsService: UserNotificationsService
   ) { }
 
   ngOnInit() {
@@ -56,6 +84,9 @@ export class CreateEvaluationReportComponent implements OnInit {
       this.evaluationReportService.createReport(newReport).subscribe((createdReport) => {
         console.log('Evaluation Report Created:', createdReport);
         alert('Evaluation Report Created Successfully!');
+        this.notification.message = `Your evaluation report for ${createdReport.testType} test of application ${createdReport.applicationId} has been released.`;
+        this.notification.userId = createdReport.userId;
+        this.createAndSendNotification();
 
         // After successful report creation, update the test schedule status
         if (curr) {

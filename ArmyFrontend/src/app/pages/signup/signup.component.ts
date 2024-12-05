@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { CandidateProfileService, CandidateProfile } from '../../services/candidate-profile.service';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,9 +12,35 @@ import { CandidateProfileService, CandidateProfile } from '../../services/candid
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'INFO',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    // Create the notification
+    if (this.notification.message.trim() !== '') {
+      // Call service to add the notification
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
+
   constructor(
     private userService: UserService,
-    private candidateProfileService: CandidateProfileService
+    private candidateProfileService: CandidateProfileService,
+    private userNotificationsService: UserNotificationsService
   ) {
     console.log('UserService and CandidateProfileService are injected successfully!');
   }
@@ -68,8 +95,16 @@ export class SignupComponent {
         console.log('User added successfully:', response);
         alert('User added successfully!');
 
+        // Send notification to user
+        if (this.user.role === 'Candidate') {
+          this.notification.userId = response.userId;
+          this.notification.message = 'Welcome to JoinForce! Update your candidate profile to start applying for vacancies.';
+          this.createAndSendNotification();
+        }
+
+
         // After user creation, assign the created user's userId to candidateProfile
-        this.candidateProfile.actualUserId = response.userId; // Assuming response contains the created user's userId
+        this.candidateProfile.actualUserId = response.userId;
 
         // Now, create the candidate profile
         this.createCandidateProfile();
