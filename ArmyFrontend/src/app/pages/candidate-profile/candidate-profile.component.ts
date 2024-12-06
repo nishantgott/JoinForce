@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CandidateProfileService, CandidateProfile } from '../../services/candidate-profile.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -16,10 +17,34 @@ export class CandidateProfileComponent implements OnInit {
   isEditing: boolean = false;
   errorMessage: string | null = null;
   userId: number = 0;
+  inputText: string | null = null;
+  notification: UserNotification = {
+    notificationId: 0,
+    userId: 1,
+    message: 'Welcome to JoinForce!',
+    dateSent: new Date(),
+    notificationType: 'MESSAGE',
+    readStatus: false
+  };
+  createAndSendNotification(): void {
+    if (this.notification.message.trim() !== '') {
+      this.userNotificationsService.addUserNotifications(this.notification.userId, this.notification).subscribe(
+        (response) => {
+          console.log('Notification Created:', response);
+        },
+        (error) => {
+          console.error('Error creating notification:', error);
+        }
+      );
+    } else {
+      console.log('Please enter a notification message');
+    }
+  }
 
   constructor(
     private candidateProfileService: CandidateProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userNotificationsService: UserNotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +76,8 @@ export class CandidateProfileComponent implements OnInit {
     this.candidateProfileService.getProfileById(this.userId).subscribe(
       (profile) => {
         this.candidateProfile = profile;
+        this.notification.userId = Number(this.route.snapshot.paramMap.get('id'))
+        console.log('notification to user ', this.notification.userId);
       },
       (error) => {
         console.error('Error loading candidate profile:', error);
@@ -86,5 +113,13 @@ export class CandidateProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  sendMessage(): void {
+    if (this.inputText) this.notification.message = this.inputText;
+    console.log(this.notification);
+    alert('Message sent successfully!');
+    this.inputText = '';
+    this.createAndSendNotification();
   }
 }

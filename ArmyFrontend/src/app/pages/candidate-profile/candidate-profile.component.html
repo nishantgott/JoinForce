@@ -1,68 +1,108 @@
-<div *ngIf="errorMessage" class="alert alert-danger">
+<div *ngIf="errorMessage" class="alert alert-danger text-red-600 bg-red-100 p-4 rounded-md">
     {{ errorMessage }}
 </div>
 
+<div class="flex flex-col max-w-2xl mx-auto mt-6">
+    <input id="textInput" type="text" [(ngModel)]="inputText" placeholder="Type your message..."
+        class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    <button (click)="sendMessage()"
+        class="bg-blue-500 w-xl mt-6 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500">Send
+        Message</button>
+</div>
+
 <div *ngIf="candidateProfile; else loading">
-    <div *ngIf="isEditing">
-        <h2>Edit Profile</h2>
-        <form (ngSubmit)="saveProfile()">
-            <div>
-                <label for="fullName">Full Nameee:</label>
-                <input id="fullName" [(ngModel)]="candidateProfile.fullName" name="fullName" required />
+    <!-- Edit Profile Section -->
+    <div *ngIf="isEditing" class="max-w-3xl m-6 mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800">Edit Profile</h2>
+        <form (ngSubmit)="saveProfile()" class="space-y-4">
+            <div class="flex flex-col">
+                <label for="fullName" class="font-medium text-gray-700">Full Name:</label>
+                <input id="fullName" [(ngModel)]="candidateProfile.fullName" name="fullName"
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required />
             </div>
-            <div>
-                <label for="dob">Date of Birth:</label>
-                <input id="dob" type="date" [(ngModel)]="candidateProfile.dob" name="dob" required />
+            <div class="flex flex-col">
+                <label for="dob" class="font-medium text-gray-700">Date of Birth:</label>
+                <input id="dob" type="date" [(ngModel)]="candidateProfile.dob" name="dob"
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required />
             </div>
-            <div>
-                <label for="qualifications">Qualifications:</label>
+            <div class="flex flex-col">
+                <label for="qualifications" class="font-medium text-gray-700">Qualifications:</label>
                 <textarea id="qualifications" [(ngModel)]="candidateProfile.qualifications" name="qualifications"
-                    required></textarea>
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required></textarea>
             </div>
-            <div>
-                <label for="experience">Experience:</label>
+            <div class="flex flex-col">
+                <label for="experience" class="font-medium text-gray-700">Experience:</label>
                 <textarea id="experience" [(ngModel)]="candidateProfile.experience" name="experience"
-                    required></textarea>
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required></textarea>
             </div>
-            <div>
-                <label for="militaryBackground">Military Background:</label>
+            <div class="flex flex-col">
+                <label for="militaryBackground" class="font-medium text-gray-700">Military Background:</label>
                 <textarea id="militaryBackground" [(ngModel)]="candidateProfile.militaryBackground"
-                    name="militaryBackground" required></textarea>
+                    name="militaryBackground"
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required></textarea>
             </div>
-            <div>
-                <label for="about">About:</label>
-                <textarea id="about" [(ngModel)]="candidateProfile.about" name="about" required></textarea>
+            <div class="flex flex-col">
+                <label for="about" class="font-medium text-gray-700">About:</label>
+                <textarea id="about" [(ngModel)]="candidateProfile.about" name="about"
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required></textarea>
             </div>
-            <button type="submit">Save</button>
-            <button type="button" (click)="cancelEdit()">Cancel</button>
+            <div class="flex flex-col">
+                <label for="photo" class="font-medium text-gray-700">Profile Picture:</label>
+                <textarea id="photo" [(ngModel)]="candidateProfile.profilePicture" name="photo"
+                    class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <div class="flex space-x-4">
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500">
+                    Save
+                </button>
+                <button type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400"
+                    (click)="cancelEdit()">Cancel</button>
+            </div>
         </form>
     </div>
 
-    <div *ngIf="!isEditing">
-        <h2>Profile Details</h2>
-        <div>
-            <strong>Full Name:</strong> {{ candidateProfile.fullName }}
+    <!-- View Profile Section -->
+    <div *ngIf="!isEditing" class="max-w-3xl m-6 mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800">Profile Details</h2>
+        <div class="space-y-4">
+            <div class="flex justify-between">
+                <strong class="text-gray-700">Full Name:</strong>
+                <span class="text-gray-900">{{ candidateProfile.fullName }}</span>
+            </div>
+            <div class="flex justify-between">
+                <strong class="text-gray-700">Date of Birth:</strong>
+                <span class="text-gray-900">{{ candidateProfile.dob | date:'longDate' }}</span>
+            </div>
+            <div class="flex justify-between">
+                <strong class="text-gray-700">Qualifications:</strong>
+                <span class="text-gray-900">{{ candidateProfile.qualifications }}</span>
+            </div>
+            <div class="flex justify-between">
+                <strong class="text-gray-700">Experience:</strong>
+                <span class="text-gray-900">{{ candidateProfile.experience }}</span>
+            </div>
+            <div class="flex justify-between">
+                <strong class="text-gray-700">Military Background:</strong>
+                <span class="text-gray-900">{{ candidateProfile.militaryBackground }}</span>
+            </div>
+            <div class="flex justify-between">
+                <strong class="text-gray-700">About:</strong>
+                <span class="text-gray-900">{{ candidateProfile.about }}</span>
+            </div>
         </div>
-        <div>
-            <strong>Date of Birth:</strong> {{ candidateProfile.dob }}
-        </div>
-        <div>
-            <strong>Qualifications:</strong> {{ candidateProfile.qualifications }}
-        </div>
-        <div>
-            <strong>Experience:</strong> {{ candidateProfile.experience }}
-        </div>
-        <div>
-            <strong>Military Background:</strong> {{ candidateProfile.militaryBackground }}
-        </div>
-        <div>
-            <strong>About:</strong> {{ candidateProfile.about }}
-        </div>
-
-        <button (click)="editProfile()">Edit Profile</button>
+        <button (click)="editProfile()"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500">
+            Edit Profile
+        </button>
     </div>
 </div>
 
+
+
+<!-- Loading Template -->
 <ng-template #loading>
-    <div>Loading profile...</div>
+    <div class="flex justify-center items-center h-64">
+        <div class="text-gray-500">Loading profile...</div>
+    </div>
 </ng-template>

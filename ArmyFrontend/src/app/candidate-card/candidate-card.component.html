@@ -5,8 +5,7 @@
     </div>
 
     <!-- Profile Image -->
-    <img [routerLink]="['/candidate-profile',candidateProfile?.actualUserId]"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt0uRIuWY7dusryxOa0EqoVGKw-oXKnaNyPQ&s"
+    <img [routerLink]="['/candidate-profile',candidateProfile?.actualUserId]" [src]="candidateProfile?.profilePicture"
         alt="Candidate Profile"
         class="w-40 h-40 object-cover border-4 border-blue-500 rounded-full mx-auto shadow-md hover:cursor-pointer">
 
