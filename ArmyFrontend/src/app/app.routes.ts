@@ -25,6 +25,9 @@ import { ApplicationReviewListCompletedComponent } from './pages/application-rev
 import { SearchComponent } from './pages/search/search.component';
 import { TrainingProgramListComponent } from './pages/training-program-list/training-program-list.component';
 import { CreateTrainingProgramComponent } from './pages/create-training-program/create-training-program.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { RecruiterVacancyListComponent } from './recruiter-vacancy-list/recruiter-vacancy-list.component';
+import { ReportComponent } from './pages/report/report.component';
 
 
 export const routes: Routes = [
@@ -53,4 +56,7 @@ export const routes: Routes = [
     { path: 'search/:query', component: SearchComponent },
     { path: 'training-program-list', component: TrainingProgramListComponent },
     { path: 'create-training-program', component: CreateTrainingProgramComponent },
+    { path: 'analytics/:id', component: AnalyticsComponent },
+    { path: 'my-vacancies', component: RecruiterVacancyListComponent },
+    { path: 'report/:id', component: ReportComponent },
 ];
