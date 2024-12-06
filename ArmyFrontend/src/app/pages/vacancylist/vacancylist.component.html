@@ -1,4 +1,4 @@
-<div *ngIf="user.role=='Candidate'" class="p-6">
+<div *ngIf="user && user.role=='Candidate'" class="p-6">
     <div class="flex justify-center space-x-12 text-2xl">
         <!-- Vacancies - Different color and underlined -->
         <a [routerLink]="['/vacancy-list']"

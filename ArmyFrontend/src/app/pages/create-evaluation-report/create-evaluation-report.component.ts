@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 import { RouterModule } from '@angular/router';
+import { Application, ApplicationService } from '../../services/application.service';
 
 @Component({
   selector: 'app-create-evaluation-report',
@@ -20,6 +21,7 @@ export class CreateEvaluationReportComponent implements OnInit {
   comments: string = '';
   score: number | null = null;
   selectedTestSchedule: TestSchedule | null = null;
+  application: Application | null = null;
   notification: UserNotification = {
     notificationId: 0,
     userId: 1,
@@ -44,13 +46,11 @@ export class CreateEvaluationReportComponent implements OnInit {
   }
 
 
-
-
-
   constructor(
     private testScheduleService: TestScheduleService,
     private evaluationReportService: EvaluationReportService,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    private applicationService: ApplicationService
   ) { }
 
   ngOnInit() {
@@ -85,15 +85,15 @@ export class CreateEvaluationReportComponent implements OnInit {
       this.evaluationReportService.createReport(newReport).subscribe((createdReport) => {
         console.log('Evaluation Report Created:', createdReport);
         alert('Evaluation Report Created Successfully!');
-        this.notification.message = `Your evaluation report for ${createdReport.testType} test of application ${createdReport.applicationId} has been released.`;
+        this.notification.message = `Your evaluation report for ${createdReport.testType} test of application ${createdReport.applicationId} has been released. Please check your application`;
         this.notification.userId = createdReport.userId;
-        this.createAndSendNotification();
 
         // After successful report creation, update the test schedule status
         if (curr) {
           this.updateTestScheduleStatus(curr.testId, this.performanceMetrics, curr);
           this.testSchedules = this.testSchedules.filter(test => test.status === 'Pending');
         }
+        this.createAndSendNotification();
 
         // Reset the form after successful creation
         this.performanceMetrics = 'Pass';  // Reset to 'Pass' after submission
@@ -117,7 +117,28 @@ export class CreateEvaluationReportComponent implements OnInit {
     this.testScheduleService.updateTestSchedule(testId, curr).subscribe(() => {
       console.log('Test schedule status updated successfully');
       console.log(curr);
-      // Optionally, handle success, such as updating the UI or state
+      // Here, if the performance metric is Pass, change the application status to Selected, else Rejected
+      this.applicationService.getApplicationById(curr.applicationId).subscribe((res) => {
+        console.log('Application fetched successfully', res);
+        if (res.applicationStatus === 'Rejected') {
+          // alert('You have already rejected this application.');
+          return;
+        }
+        if (status != 'Pass') res.applicationStatus = 'Rejected';
+        else {
+          if (res.applicationStatus === 'Shortlisted') res.applicationStatus = 'ShortListed';
+          else {
+            res.applicationStatus = 'Selected';
+            this.notification.message = `Congratulations! Your application(ID: ${res.applicationId}) has been selected. Please check your offers`;
+            this.createAndSendNotification();
+          }
+        }
+        this.applicationService.updateApplication(res.applicationId, res).subscribe(() => {
+          console.log('Application status updated successfully');
+        }, (error) => {
+          console.error('Error updating application status:', error);
+        });
+      });
     }, error => {
       console.error('Error updating test schedule:', error);
     });
