@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VacancyService } from '../../services/vacancy.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Application, ApplicationService } from '../../services/application.service';
 import { DocumentVerification, DocumentVerificationService } from '../../services/document-verification.service';
@@ -9,7 +9,7 @@ import { UserNotification, UserNotificationsService } from '../../services/user-
 @Component({
   selector: 'app-vacancy',
   standalone: true,
-  imports: [DatePipe, CurrencyPipe, CommonModule],
+  imports: [DatePipe, CurrencyPipe, CommonModule, RouterModule],
   templateUrl: './vacancy.component.html',
   styleUrls: ['./vacancy.component.css']
 })
@@ -67,7 +67,8 @@ export class VacancyComponent implements OnInit {
     private route: ActivatedRoute,
     private applicationService: ApplicationService,
     private documentVerificationService: DocumentVerificationService,
-    private userNotificationsService: UserNotificationsService
+    private userNotificationsService: UserNotificationsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -90,6 +91,9 @@ export class VacancyComponent implements OnInit {
         const user = JSON.parse(storedUser);
         this.userId = user.userId;
       }
+    }
+    if (!this.userId) {
+      alert('Please login in as a candidate to apply for this vacancy');
     }
 
     console.log('User ID:', this.userId);
@@ -144,6 +148,7 @@ export class VacancyComponent implements OnInit {
                 (createdDocumentVerification) => {
                   console.log('Document Verification Created:', createdDocumentVerification);
                   // Handle success (maybe show a success message)
+                  this.router.navigate(['/application-list']);
                 },
                 (error) => {
                   console.error('Error creating document verification:', error);

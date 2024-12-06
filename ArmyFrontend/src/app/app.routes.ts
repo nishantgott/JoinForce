@@ -23,6 +23,8 @@ import { ResultsListExamComponent } from './pages/results-list-exam/results-list
 import { ApplicationReviewListComponent } from './pages/application-review-list/application-review-list.component';
 import { ApplicationReviewListCompletedComponent } from './pages/application-review-list-completed/application-review-list-completed.component';
 import { SearchComponent } from './pages/search/search.component';
+import { TrainingProgramListComponent } from './pages/training-program-list/training-program-list.component';
+import { CreateTrainingProgramComponent } from './pages/create-training-program/create-training-program.component';
 
 
 export const routes: Routes = [
@@ -49,4 +51,6 @@ export const routes: Routes = [
     { path: 'application-review-list-completed', component: ApplicationReviewListCompletedComponent },
     { path: 'search', component: SearchComponent },
     { path: 'search/:query', component: SearchComponent },
+    { path: 'training-program-list', component: TrainingProgramListComponent },
+    { path: 'create-training-program', component: CreateTrainingProgramComponent },
 ];
