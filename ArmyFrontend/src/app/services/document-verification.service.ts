@@ -5,10 +5,21 @@ import { Observable } from 'rxjs';
 export interface DocumentVerification {
   verificationId: number;
   applicationId: number;
-  documentType: string; // IdentityProof, EducationCertificate, etc.
-  verificationStatus: string; // Pending, Verified, Rejected
+  documentType: string;
+  verificationStatus: string;
   remarks: string;
+
+  // Document fields
+  document1: string;
+  document1Type: string;
+
+  document2: string;
+  document2Type: string;
+
+  document3: string;
+  document3Type: string;
 }
+
 
 @Injectable({
   providedIn: 'root',
