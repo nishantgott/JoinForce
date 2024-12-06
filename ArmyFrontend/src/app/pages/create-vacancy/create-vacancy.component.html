@@ -1,6 +1,14 @@
 <div class="min-h-screen bg-yellow-200 p-6">
+    <div class="p-6">
+        <div class="flex justify-center space-x-12 text-2xl">
+            <a [routerLink]="['vacancy_list']"
+                class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Vacancy</a>
+            <a [routerLink]="['/create-training-program']" class="text-gray-700 hover:text-blue-500">Training
+                Program</a>
+        </div>
+    </div>
     <div class="max-w-screen-md mx-auto bg-white p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-semibold">Create Vacancy</h2>
+        <h2 class="text-2xl font-semibold mb-6">Create Vacancy</h2>
 
         <!-- Form starts here -->
         <form (ngSubmit)="onSubmit()" #vacancyForm="ngForm" class="space-y-4">

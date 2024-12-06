@@ -11,4 +11,5 @@ public class TrainingProgram
     public DateTime EndDate { get; set; }
     public string Trainer { get; set; }
     public string Content { get; set; }
+    public string TrainingType { get; set; }
 }
