@@ -3,14 +3,15 @@ import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { ApplicationService } from '../../services/application.service';
 import { VacancyService } from '../../services/vacancy.service';
 import { ExamResultService } from '../../services/exam-result.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 import { CandidateCardComponent } from "../../candidate-card/candidate-card.component";
+import { DocumentVerification, DocumentVerificationService } from '../../services/document-verification.service';
 
 @Component({
   selector: 'app-application-review',
   standalone: true,
-  imports: [DatePipe, CandidateCardComponent, RouterModule],
+  imports: [DatePipe, CandidateCardComponent, RouterModule, CommonModule],
   templateUrl: './application-review.component.html',
   styleUrls: ['./application-review.component.css']
 })
@@ -20,6 +21,8 @@ export class ApplicationReviewComponent implements OnInit {
   exam: any = null;       // Initialize to null
   applicationId: number = 0;
   userId: number = 0;
+  isDataLoaded: boolean = false;
+  documentVerification: DocumentVerification | null = null;
   notification: UserNotification = {
     notificationId: 0,
     userId: 1,
@@ -51,7 +54,8 @@ export class ApplicationReviewComponent implements OnInit {
     private examResultService: ExamResultService,
     private route: ActivatedRoute,
     private userNotificationsService: UserNotificationsService,
-    private router: Router
+    private router: Router,
+    private documentVerificationService: DocumentVerificationService
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +68,7 @@ export class ApplicationReviewComponent implements OnInit {
           this.application = app;
           this.notification.userId = this.application.userId;
           this.userId = this.application.userId;
+          // this.userId = 40;
 
           // After fetching the application, fetch the related vacancy
           this.vacancyService.getVacancyById(app.vacancyId).subscribe((vacancy) => {
@@ -80,6 +85,16 @@ export class ApplicationReviewComponent implements OnInit {
                 } else {
                   this.exam = null;  // Handle the case where no exams are found
                 }
+                this.documentVerificationService.getVerificationsByApplicationId(this.application.applicationId).subscribe(
+                  (verifications) => {
+                    if (verifications && verifications.length > 0) this.documentVerification = verifications[0];
+                    console.log('Verifications:', this.documentVerification);
+                    this.isDataLoaded = true;
+                  },
+                  (error) => {
+                    console.error('Error fetching verifications:', error);
+                  }
+                );
               }, (error) => {
                 console.error('Error fetching exams:', error);
                 this.exam = null;  // Fallback to null if error occurs

@@ -1,22 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { VacancyService } from '../../services/vacancy.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Application, ApplicationService } from '../../services/application.service';
-import { DocumentVerification, DocumentVerificationService } from '../../services/document-verification.service';
-import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { VacancyService } from "../../services/vacancy.service";
+import { Application, ApplicationService } from "../../services/application.service";
+import { DocumentVerification, DocumentVerificationService } from "../../services/document-verification.service";
+import { UserNotification, UserNotificationsService } from "../../services/user-notifications.service";
+import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-vacancy',
   standalone: true,
-  imports: [DatePipe, CurrencyPipe, CommonModule, RouterModule],
+  imports: [DatePipe, CurrencyPipe, CommonModule, RouterModule, FormsModule],
   templateUrl: './vacancy.component.html',
   styleUrls: ['./vacancy.component.css']
 })
+
 export class VacancyComponent implements OnInit {
-  vacancy: any; // Variable to hold the vacancy data
+  vacancy: any; // Vacancy data
   userId: number = 0;
   vacancyId: number = 0;
+  showDocumentModal: boolean = false; // Controls modal visibility
+  documentDetails: any = {
+    document1: null,
+    document1Type: '',
+    document2: null,
+    document2Type: '',
+    document3: null,
+    document3Type: '',
+  };
+  documentVerification: DocumentVerification = {
+    verificationId: 0,  // Backend should auto-generate this
+    applicationId: 0,  // Use the created application's ID
+    documentType: 'Identity Proof',
+    verificationStatus: 'Pending',
+    remarks: '',
+    document1: '',
+    document1Type: '',
+    document2: '',
+    document2Type: '',
+    document3: '',
+    document3Type: '',
+  };
   notification: UserNotification = {
     notificationId: 0,
     userId: 1,
@@ -73,10 +97,50 @@ export class VacancyComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-
     if (id) {
-      this.getVacancyDetails(+id); // Passing +id to ensure vacancyId is a number
+      this.getVacancyDetails(+id); // Ensure vacancyId is a number
     }
+  }
+
+  // Open the modal
+  openDocumentModal(): void {
+    this.showDocumentModal = true;
+  }
+
+  // Close the modal
+  closeDocumentModal(): void {
+    this.showDocumentModal = false;
+  }
+
+  // Handle file input changes
+  onFileChange(event: Event, documentField: string): void {
+    const target = event.target as HTMLInputElement;
+    const file = target.files ? target.files[0] : null;
+    if (file) {
+      this.documentDetails[documentField] = file;
+    }
+  }
+
+  // Submit document details and proceed with application submission
+  submitDocumentDetails(): void {
+    // Close modal
+    this.closeDocumentModal();
+
+    // Proceed with application submission
+    this.onSubmit();
+
+  }
+
+  // Validate document details
+  validateDocumentDetails(): boolean {
+    return (
+      this.documentDetails.document1 &&
+      this.documentDetails.document1Type &&
+      this.documentDetails.document2 &&
+      this.documentDetails.document2Type &&
+      this.documentDetails.document3 &&
+      this.documentDetails.document3Type
+    );
   }
 
   onSubmit(): void {
@@ -136,15 +200,10 @@ export class VacancyComponent implements OnInit {
               this.createAndSendNotification2();
 
               // Step 4: Create Document Verification for the created application
-              const documentVerification: DocumentVerification = {
-                verificationId: 0,  // Backend should auto-generate this
-                applicationId: createdApplication.applicationId,  // Use the created application's ID
-                documentType: 'Identity Proof',
-                verificationStatus: 'Pending',
-                remarks: '',
-              };
 
-              this.documentVerificationService.createVerification(documentVerification).subscribe(
+              this.documentVerification.applicationId = createdApplication.applicationId;
+
+              this.documentVerificationService.createVerification(this.documentVerification).subscribe(
                 (createdDocumentVerification) => {
                   console.log('Document Verification Created:', createdDocumentVerification);
                   // Handle success (maybe show a success message)
@@ -172,11 +231,11 @@ export class VacancyComponent implements OnInit {
     }
   }
 
+
   getVacancyDetails(id: number): void {
     this.vacancyService.getVacancyById(id).subscribe(
       (data) => {
         this.vacancy = data;
-        console.log('Vacancy Details:', this.vacancy);
       },
       (error) => {
         console.error('Error fetching vacancy details', error);

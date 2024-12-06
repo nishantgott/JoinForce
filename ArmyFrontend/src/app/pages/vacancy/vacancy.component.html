@@ -108,7 +108,7 @@
         <!-- Right Column -->
         <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center"
             style="height: auto; max-height: 300px;">
-            <button (click)="onSubmit()"
+            <button (click)="openDocumentModal()"
                 class="bg-blue-500 text-white py-3 px-8 rounded-lg font-medium text-lg shadow-md hover:bg-blue-600 w-full">
                 Quick Apply
             </button>
@@ -132,5 +132,75 @@
                 Explore More Jobs
             </button>
         </div>
+    </div>
+</div>
+
+
+<!-- Modal for Document Upload -->
+<div *ngIf="showDocumentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-bold mb-4">Upload Documents</h2>
+
+        <!-- Document Form -->
+        <form (ngSubmit)="submitDocumentDetails()">
+            <div class="space-y-4">
+                <!-- Document 1 -->
+                <div>
+                    <label for="document1" class="block font-medium text-gray-700">Document 1</label>
+                    <select [(ngModel)]="documentVerification.document1" name="document1" id="document1"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+                    <input type="text" [(ngModel)]="documentVerification.document1Type" name="document1Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+
+                <!-- Document 2 -->
+                <div>
+                    <label for="document2" class="block font-medium text-gray-700">Document 2</label>
+                    <select [(ngModel)]="documentVerification.document2" name="document2" id="document2"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+
+                    <input type="text" [(ngModel)]="documentVerification.document2Type" name="document2Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+
+                <!-- Document 3 -->
+                <div>
+                    <label for="document3" class="block font-medium text-gray-700">Document 3</label>
+                    <select [(ngModel)]="documentVerification.document3" name="document3" id="document3"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+                    <input type="text" [(ngModel)]="documentVerification.document3Type" name="document3Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-end gap-4">
+                <button type="button" (click)="closeDocumentModal()"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">Cancel</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
