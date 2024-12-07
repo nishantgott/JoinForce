@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cH9sunDpCJs=",
+  "dgSpecHash": "hqC6iSEIgSI=",
   "success": true,
   "projectFilePath": "/Users/nishantg/Downloads/JoinForce/ArmyBackend/ArmyBackend.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "/Users/nishantg/.nuget/packages/microsoft.sqlserver.server/1.0.0/microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "/Users/nishantg/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "/Users/nishantg/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
+    "/Users/nishantg/.nuget/packages/restsharp/112.1.0/restsharp.112.1.0.nupkg.sha512",
     "/Users/nishantg/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "/Users/nishantg/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "/Users/nishantg/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
