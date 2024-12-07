@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
+<header class="flex items-center justify-between bg-[#B2C9AD] px-6 py-4 shadow-md">
     <!-- Logo Section -->
     <div class="flex items-center space-x-8">
         <div class="flex items-center">
@@ -6,47 +6,44 @@
                 class="w-20 hover:cursor-pointer" />
         </div>
         <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            class="w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F]" />
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-gray-700">
-        <a [routerLink]="['/vacancy-list']" class="hover:underline">Jobs</a>
-        <a [routerLink]="['/test-exam-list']" class="hover:underline">Tests and Exams</a>
-        <a [routerLink]="['/results-list-exam']" class="hover:underline">Results</a>
-        <a [routerLink]="['/training-program-list']" class="hover:underline">Training</a>
-        <a [routerLink]="['/notifications']" class="hover:underline">Notifications</a>
+    <nav class="flex items-center ml-6 space-x-8 text-[#4B5945]">
+        <a [routerLink]="['/vacancy-list']" class="hover:underline hover:text-[#66785F]">Jobs</a>
+        <a [routerLink]="['/test-exam-list']" class="hover:underline hover:text-[#66785F]">Tests and Exams</a>
+        <a [routerLink]="['/results-list-exam']" class="hover:underline hover:text-[#66785F]">Results</a>
+        <a [routerLink]="['/training-program-list']" class="hover:underline hover:text-[#66785F]">Training</a>
+        <a [routerLink]="['/notifications']" class="hover:underline hover:text-[#66785F]">Notifications</a>
 
-        <!-- Practice Link with Dropdown -->
-        <div class="relative border-2 border-gray-300 rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
+        <!-- User Dropdown -->
+        <div class="relative border-2 border-[#91AC8F] rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
             (click)="toggleDropdown($event)">
             <div class="flex">
-                <a [routerLink]="['/notifications', user.userId]">
+                <a [routerLink]="['/notifications', user.userId]" class="text-[#4B5945]">
                     {{user.username}}
                 </a>
 
                 <!-- Dropdown Toggle Icon -->
                 <span class="ml-2 mt-2" [ngClass]="{'rotate-180 mb-2': isDropdownVisible}">
-                    <!-- Icon for when the dropdown is open -->
                     <svg *ngIf="isDropdownVisible" class="MuiSvgIcon-root jss17553 jss17554 w-3" focusable="false"
                         viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
                     </svg>
-                    <!-- Icon for when the dropdown is closed -->
                     <svg *ngIf="!isDropdownVisible" class="MuiSvgIcon-root jss17553 w-3" focusable="false"
                         viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
                     </svg>
                 </span>
-
             </div>
 
             <!-- Dropdown Menu -->
             <div *ngIf="isDropdownVisible"
-                class="absolute right-0 mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-lg w-40 text-sm z-10">
+                class="absolute right-0 mt-2 bg-[#B2C9AD] border-2 border-[#66785F] rounded-lg shadow-lg w-40 text-sm z-10">
                 <a [routerLink]="['/candidate-profile', user.userId]"
-                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                <a (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log
+                    class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Profile</a>
+                <a (click)="logout()" class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Log
                     Out</a>
             </div>
         </div>

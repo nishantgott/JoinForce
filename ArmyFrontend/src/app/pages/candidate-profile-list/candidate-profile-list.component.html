@@ -1,5 +1,9 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 m-20">
-    <div *ngFor="let user of users" class="my-10">
-        <app-candidate-card [actualUserId]="user.userId"></app-candidate-card>
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+    <div class="container mx-auto bg-white p-6 border border-[#D6BD98] rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div *ngFor="let user of users" class="flex justify-center">
+                <app-candidate-card [actualUserId]="user.userId" class="w-80"></app-candidate-card>
+            </div>
+        </div>
     </div>
 </div>

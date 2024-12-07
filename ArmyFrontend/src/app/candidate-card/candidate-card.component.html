@@ -1,27 +1,36 @@
-<div class="flex flex-col gap-6 py-8 px-4 rounded-lg bg-white shadow-lg border border-gray-300 max-w-sm mx-auto">
+<div class="flex flex-col gap-2 py-8 px-6 rounded-lg bg-[#B2C9AD] shadow-lg border border-[#1A3636] max-w-sm mx-auto">
     <!-- Candidate ID -->
-    <div class="text-lg font-semibold text-gray-800">
-        ID: <span class="text-blue-600">{{candidateProfile?.actualUserId}}</span>
+    <div class="text-lg font-semibold text-[#1A3636] text-center">
+        ID: <span class="text-[#40534C]">{{candidateProfile?.actualUserId}}</span>
     </div>
 
     <!-- Profile Image -->
-    <img [routerLink]="['/candidate-profile',candidateProfile?.actualUserId]" [src]="candidateProfile?.profilePicture"
-        alt="Candidate Profile"
-        class="w-40 h-40 object-cover border-4 border-blue-500 rounded-full mx-auto shadow-md hover:cursor-pointer">
+    <div class="flex justify-center">
+        <img [routerLink]="['/candidate-profile', candidateProfile?.actualUserId]"
+            [src]="candidateProfile?.profilePicture" alt="Candidate Profile"
+            class="w-40 h-40 object-cover border-4 border-[#1A3636] rounded-full shadow-md hover:cursor-pointer">
+    </div>
 
     <!-- Candidate Full Name -->
-    <div class="mt-4 text-2xl font-bold text-gray-800 text-center">
+    <div class="mt-4 text-2xl font-bold text-[#1A3636] text-center">
         {{candidateProfile?.fullName}}
     </div>
 
     <!-- Candidate Date of Birth -->
-    <div class="text-sm text-gray-600 text-center">
-        <strong>DOB:</strong> {{candidateProfile?.dob | date}}
+    <div class="text-sm text-[#40534C] text-center">
+        <strong class="font-semibold">DOB:</strong> {{candidateProfile?.dob | date}}
     </div>
 
     <!-- Candidate Experience -->
-    <div class="text-sm text-gray-600 text-center">
-        <strong>Experience:</strong> {{candidateProfile?.experience}}
+    <div class="text-sm text-[#40534C] text-center">
+        <strong class="font-semibold">Experience:</strong> {{candidateProfile?.experience}} years
     </div>
 
+    <!-- View Profile Button -->
+    <div class="mt-4 flex justify-center">
+        <button [routerLink]="['/candidate-profile', candidateProfile?.actualUserId]"
+            class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg font-medium text-lg shadow-md hover:bg-[#40534C]">
+            View Profile
+        </button>
+    </div>
 </div>

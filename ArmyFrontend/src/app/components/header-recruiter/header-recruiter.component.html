@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
+<header class="flex items-center justify-between bg-[#B2C9AD] px-6 py-4 shadow-md">
     <!-- Logo Section -->
     <div class="flex items-center space-x-8">
         <div class="flex items-center">
@@ -6,23 +6,22 @@
                 class="w-20 hover:cursor-pointer" />
         </div>
         <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            class="w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F]" />
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-gray-700">
-        <a [routerLink]="['/candidate-profile-list']" class="hover:underline">Candidates</a>
-        <a [routerLink]="['/application-review-list']" class="hover:underline">Reviews</a>
-        <a [routerLink]="['/create_vacancy']" class="hover:underline">Create</a>
-        <a [routerLink]="['/my-vacancies']" class="hover:underline">Analytics</a>
-        <!-- <a href="#" class="hover:underline">My Vacancies</a> -->
-        <a [routerLink]="['/notifications']" class="hover:underline">Notifications</a>
+    <nav class="flex items-center ml-6 space-x-8 text-[#4B5945]">
+        <a [routerLink]="['/candidate-profile-list']" class="hover:underline hover:text-[#66785F]">Candidates</a>
+        <a [routerLink]="['/application-review-list']" class="hover:underline hover:text-[#66785F]">Reviews</a>
+        <a [routerLink]="['/create_vacancy']" class="hover:underline hover:text-[#66785F]">Create</a>
+        <a [routerLink]="['/my-vacancies']" class="hover:underline hover:text-[#66785F]">Analytics</a>
+        <a [routerLink]="['/notifications']" class="hover:underline hover:text-[#66785F]">Notifications</a>
 
         <!-- Practice Link with Dropdown -->
-        <div class="relative border-2 border-gray-300 rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
+        <div class="relative border-2 border-[#91AC8F] rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
             (click)="toggleDropdown($event)">
             <div class="flex">
-                <a>
+                <a class="text-[#4B5945]">
                     {{user.username}}
                 </a>
 
@@ -44,10 +43,11 @@
 
             <!-- Dropdown Menu -->
             <div *ngIf="isDropdownVisible"
-                class="absolute right-0 mt-2 bg-white border-2 border-gray-300 rounded-lg shadow-lg w-40 text-sm z-10">
+                class="absolute right-0 mt-2 bg-[#B2C9AD] border-2 border-[#66785F] rounded-lg shadow-lg w-40 text-sm z-10">
                 <a [routerLink]="['candidate-profile',user.userId]"
-                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
-                <a (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Log Out</a>
+                    class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Profile</a>
+                <a (click)="logout()" class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Log
+                    Out</a>
             </div>
         </div>
     </nav>

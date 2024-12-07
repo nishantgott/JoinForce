@@ -1,45 +1,31 @@
-<div class="min-h-screen p-6">
-    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Results</h1>
+<div class="min-h-screen p-6 bg-[#F5F5E9]">
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-[#D6BD98]">
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#1A3636]">Results</h1>
 
         <div class="p-6">
-            <div class="flex justify-center space-x-12 text-2xl">
-                <a [routerLink]="['/results-list-exam']" class="text-gray-700 hover:text-blue-500 ">Exam Results</a>
+            <div class="flex justify-center space-x-12 text-xl font-semibold">
+                <a [routerLink]="['/results-list-exam']" class="text-[#40534C] hover:text-[#1A3636]">Exam Results</a>
 
                 <a [routerLink]="['/results-list']"
-                    class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Evaluation
-                    Reports</a>
-
+                    class="text-[#1A3636] border-b-4 border-[#1A3636] hover:text-[#40534C]">Evaluation Reports</a>
             </div>
         </div>
 
-
         <!-- Results List -->
         <div *ngFor="let report of evaluationReports"
-            class="mb-6 p-4 bg-white rounded-lg shadow-md border border-gray-200">
+            class="mb-6 p-8 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
 
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">Report for {{report.testType}} test of application {{
-                report.applicationId }}</h3>
-
-            <div class="mb-4">
-                <span class="text-sm text-gray-600">Score: </span>
-                <span class="text-lg font-medium">{{ report.score }}</span>
+            <h3 class="text-xl font-bold text-[#1A3636] mb-4">
+                Report for {{ report.testType }} test of application {{ report.applicationId }}
+            </h3>
+            <div class="mb-4 text-lg text-[#1A3636]">
+                <span class="font-semibold">Score:</span> {{ report.score }}
             </div>
-
-            <div class="mb-4">
-                <span class="text-sm text-gray-600">Result: </span>
-                <span class="text-lg font-medium" [ngClass]="{
-                  'text-green-700': report.performanceMetrics === 'Pass', 
-                  'text-red-700': report.performanceMetrics !== 'Pass'
-                }">
-                    {{ report.performanceMetrics }}
-                </span>
-
+            <div class="mb-4 text-lg text-[#1A3636]">
+                <span class="font-semibold">Result:</span> {{ report.performanceMetrics }}
             </div>
-
-            <div class="mb-4">
-                <span class="text-sm text-gray-600">Evaluation date: </span>
-                <span class="text-lg font-medium">{{ report.evaluationDate | date: 'longDate' }}</span>
+            <div class="mb-4 text-lg text-[#1A3636]">
+                <span class="font-semibold">Evaluation Date:</span> {{ report.evaluationDate | date: 'longDate' }}
             </div>
 
         </div>

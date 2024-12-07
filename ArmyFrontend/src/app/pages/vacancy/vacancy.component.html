@@ -1,104 +1,94 @@
-<div class="min-h-screen bg-yellow-200 p-6">
+<div class="min-h-screen bg-[#F5F5E9] p-6">
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 max-w-screen-lg mx-auto">
         <!-- Left Column -->
         <div class="col-span-3">
             <!-- Header Section -->
-            <div class="flex flex-col items-start mt-6 p-4 gap-6">
-                <h1 class="text-3xl font-bold">{{ vacancy?.title }}</h1>
-                <p class="text-gray-500">
-                    <span class="text-xl font-bold">{{ vacancy?.role }}</span>
-                    <br>
-                    <span>{{ vacancy?.location }}</span>
-                    <br>
+            <div class="flex flex-col items-start bg-[#B2C9AD] p-6 rounded-lg shadow-lg gap-4">
+                <h1 class="text-3xl font-bold text-[#1A3636]">{{ vacancy?.title }}</h1>
+                <p class="text-[#40534C]">
+                    <span class="text-xl font-semibold">{{ vacancy?.role }}</span><br>
+                    <span>{{ vacancy?.location }}</span><br>
                     <span class="text-sm">Posted On: {{ vacancy?.datePosted | date: 'shortDate' }}</span>
                 </p>
             </div>
 
             <!-- Tab Navigation -->
-            <div class="mt-6 bg-white p-4 rounded-xl shadow-lg">
-                <div class="flex gap-6 text-gray-500 font-medium">
-                    <button class="border-b-2 border-orange-500 text-orange-500">Recruitment Process</button>
-                    <button>Job Description</button>
-                    <button>Dates & Deadlines</button>
-                    <button>Reviews</button>
-                    <button>FAQs & Discussions</button>
+            <div class="mt-6 bg-white p-4 rounded-lg bg-[#B2C9AD] shadow-lg">
+                <div class="flex gap-6 text-[#1A3636] font-medium">
+                    <button class="border-b-4 border-[#1A3636] pb-1">Recruitment Process</button>
+                    <button class="hover:text-[#40534C]">Job Description</button>
+                    <button class="hover:text-[#40534C]">Dates & Deadlines</button>
+                    <button class="hover:text-[#40534C]">Reviews</button>
+                    <button class="hover:text-[#40534C]">FAQs & Discussions</button>
                 </div>
             </div>
 
             <!-- Recruitment Process Section -->
-            <div class="mt-6 bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold">Recruitment Process</h2>
-                <div class="mt-4 flex items-center gap-4">
-                    <div class="bg-orange-100 text-orange-500 font-bold text-xl p-4 rounded-lg shadow-md">
+            <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-[#1A3636]">Recruitment Process</h2>
+                <div class="mt-4 flex items-center gap-6">
+                    <div class="bg-[#D6BD98] text-[#1A3636] font-bold text-xl p-4 rounded-lg shadow-md">
                         <p>{{ vacancy?.recruitmentDate | date: 'dd' }}</p>
-                        <p class="text-sm">{{ vacancy?.recruitmentDate | date: 'MMM dd' }}</p>
+                        <p class="text-sm">{{ vacancy?.recruitmentDate | date: 'MMM yyyy' }}</p>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold">Interview</h3>
-                        <p class="text-gray-500">{{ vacancy?.interviewDetails }}</p>
-                        <p class="text-sm text-gray-400">Start: {{ vacancy?.interviewStartDate | date: 'medium' }}</p>
-                        <p class="text-sm text-gray-400">End: {{ vacancy?.interviewEndDate | date: 'medium' }}</p>
+                        <h3 class="text-lg font-bold text-[#1A3636]">Interview</h3>
+                        <p class="text-[#40534C]">{{ vacancy?.interviewDetails }}</p>
+                        <p class="text-sm text-[#66785F]">Start: {{ vacancy?.interviewStartDate | date: 'medium' }}</p>
+                        <p class="text-sm text-[#66785F]">End: {{ vacancy?.interviewEndDate | date: 'medium' }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Details Section -->
-            <div class="mt-6 bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold">Details</h2>
-                <p class="mt-4 text-gray-600">{{ vacancy?.jobDetails }}</p>
+            <div class="mt-6 bg-white p-6 bg-[#B2C9AD] rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold text-[#1A3636]">Details</h2>
+                <p class="mt-4 text-[#40534C]">{{ vacancy?.jobDetails }}</p>
             </div>
 
             <!-- Additional Sections -->
-            <div class="mt-6 bg-white p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-semibold mb-4">Additional Information</h2>
+            <div class="mt-6 bg-white p-6 rounded-lg bg-[#B2C9AD] shadow-lg">
+                <h2 class="text-2xl font-semibold text-[#1A3636] mb-4">Additional Information</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <!-- Experience -->
-                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-gray-50 shadow-sm">
-                        <div class="p-4">
-                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/66710a39d5851_experience.png?d=240x172"
-                                alt="Experience" class="w-16">
-                        </div>
+                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                        <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/66710a39d5851_experience.png?d=240x172"
+                            alt="Experience" class="w-16">
                         <div>
-                            <h3 class="text-lg font-bold">Experience</h3>
-                            <p class="text-sm text-gray-500">Minimum: {{ vacancy?.experienceMin }} years</p>
-                            <p class="text-sm text-gray-500">Maximum: {{ vacancy?.experienceMax }} years</p>
+                            <h3 class="text-lg font-bold text-[#1A3636]">Experience</h3>
+                            <p class="text-sm text-[#40534C]">Minimum: {{ vacancy?.experienceMin }} years</p>
+                            <p class="text-sm text-[#40534C]">Maximum: {{ vacancy?.experienceMax }} years</p>
                         </div>
                     </div>
 
                     <!-- Salary -->
-                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-gray-50 shadow-sm">
-                        <div class="p-4">
-                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109f58b243_salary.png?d=240x172"
-                                alt="Salary" class="w-16">
-                        </div>
+                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                        <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109f58b243_salary.png?d=240x172"
+                            alt="Salary" class="w-16">
                         <div>
-                            <h3 class="text-lg font-bold">Salary</h3>
-                            <p class="text-sm text-gray-500">Salary: {{ vacancy?.salary | currency }}</p>
+                            <h3 class="text-lg font-bold text-[#1A3636]">Salary</h3>
+                            <p class="text-sm text-[#40534C]">{{ vacancy?.salary | currency }}</p>
                         </div>
                     </div>
 
                     <!-- Work Detail -->
-                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-gray-50 shadow-sm">
-                        <div class="p-4">
-                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109d710a09_work_detail.png?d=240x172"
-                                alt="Work Detail" class="w-16">
-                        </div>
+                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                        <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109d710a09_work_detail.png?d=240x172"
+                            alt="Work Detail" class="w-16">
                         <div>
-                            <h3 class="text-lg font-bold">Work Detail</h3>
-                            <p class="text-sm text-gray-500">Working Days: 6 days</p>
+                            <h3 class="text-lg font-bold text-[#1A3636]">Work Detail</h3>
+                            <p class="text-sm text-[#40534C]">Working Days: 6 days</p>
                         </div>
                     </div>
 
                     <!-- Job Type/Timing -->
-                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-gray-50 shadow-sm">
-                        <div class="p-4">
-                            <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109c430518_job_typetiming.png?d=240x172"
-                                alt="Job Type" class="w-16">
-                        </div>
+                    <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                        <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109c430518_job_typetiming.png?d=240x172"
+                            alt="Job Type" class="w-16">
                         <div>
-                            <h3 class="text-lg font-bold">Job Type/Timing</h3>
-                            <p class="text-sm text-gray-500">Job Type: {{ vacancy?.role }}</p>
-                            <p class="text-sm text-gray-500">Job Timing: Full time</p>
+                            <h3 class="text-lg font-bold text-[#1A3636]">Job Type/Timing</h3>
+                            <p class="text-sm text-[#40534C]">Role: {{ vacancy?.role }}</p>
+                            <p class="text-sm text-[#40534C]">Timing: Full time</p>
                         </div>
                     </div>
                 </div>
@@ -106,29 +96,28 @@
         </div>
 
         <!-- Right Column -->
-        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center"
-            style="height: auto; max-height: 300px;">
+        <div class="bg-[#D6BD98] p-6 rounded-lg shadow-lg flex flex-col items-center gap-4">
             <button (click)="openDocumentModal()"
-                class="bg-blue-500 text-white py-3 px-8 rounded-lg font-medium text-lg shadow-md hover:bg-blue-600 w-full">
+                class="bg-[#1A3636] text-[#D6BD98] py-3 px-6 rounded-lg font-medium text-lg shadow-md hover:bg-[#40534C] w-full">
                 Quick Apply
             </button>
-            <div class="text-red-500 mt-1">Deadline: {{ vacancy?.deadline | date: 'shortDate' }}</div>
-            <div class="text-gray-500 mt-6 text-center">
+            <div class="text-[#40534C] text-sm">Deadline: {{ vacancy?.deadline | date: 'shortDate' }}</div>
+            <div class="text-[#1A3636] mt-4">
                 <p class="text-xl font-bold"><strong>{{ vacancy?.appliedCount }}</strong> Applied</p>
             </div>
             <div class="flex flex-col items-center mt-6 gap-2">
-                <h1 class="text-xl font-bold">Eligibility Criteria</h1>
-                <h1 class="text-gray-500 text-xl font-bold">{{ vacancy?.eligibilityCriteria }}</h1>
+                <h1 class="text-xl font-bold text-[#1A3636]">Eligibility Criteria</h1>
+                <h1 class="text-[#40534C] text-lg">{{ vacancy?.eligibilityCriteria }}</h1>
             </div>
+
         </div>
 
-        <!-- New Box Section Below Quick Apply -->
-        <div class="mt-6 bg-white p-6 rounded-xl shadow-lg flex flex-col items-center">
-            <h3 class="text-lg font-bold">Want to Learn More?</h3>
-            <p class="text-gray-500 mt-4 text-center">Check out more job opportunities and explore career growth with
-                us. Apply for other roles today!</p>
+        <!-- Explore More Section -->
+        <div class="mt-6 bg-[#91AC8F] p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <h3 class="text-lg font-bold text-[#1A3636]">Want to Learn More?</h3>
+            <p class="text-[#40534C] mt-4 text-center">Explore career growth with us. Apply for other roles today!</p>
             <button [routerLink]="['/vacancy-list']"
-                class="mt-4 bg-green-500 text-white py-3 px-8 rounded-lg font-medium text-lg shadow-md hover:bg-green-600 w-full">
+                class="mt-4 bg-[#4B5945] text-[#D6BD98] py-3 px-6 rounded-lg font-medium text-lg shadow-md hover:bg-[#40534C] w-full">
                 Explore More Jobs
             </button>
         </div>

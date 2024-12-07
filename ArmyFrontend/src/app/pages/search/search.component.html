@@ -1,74 +1,69 @@
-<!-- Search Form -->
-<div class="flex justify-center items-center gap-6 ">
-    <input (keydown.enter)="searchVacancies()" type="text" [(ngModel)]="searchTerm"
-        placeholder="Search Opportunities by title, role, or job description"
-        class="my-10 w-full max-w-6xl mx-20 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
-</div>
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+
+    <!-- Search Form -->
+    <div class="flex justify-center items-center gap-6 ">
+        <input (keydown.enter)="searchVacancies()" type="text" [(ngModel)]="searchTerm"
+            placeholder="Search Opportunities by title, role, or job description"
+            class="my-10 w-full max-w-6xl mx-20 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
 
 
-<!-- Loading Spinner -->
-<div *ngIf="isLoading" class="loading">
-    <p>Loading...</p>
-</div>
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading">
+        <p>Loading...</p>
+    </div>
 
-<div class="flex flex-col m-6 justify-center items-center gap-6" *ngFor="let vacancy of vacancies">
-    <div class="bg-white p-6 rounded-lg border border-gray-300 shadow-xl max-w-5xl w-full">
-        <!-- Box Title -->
-
-        <div class="flex border-b border-gray-300 gap-6">
-            <svg class="MuiSvgIcon-root jss15985 w-12" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
-                aria-label="Indium Software">
-                <g>
-                    <path opacity="0.48"
-                        d="M6 8.58268V20.8601C6.00024 20.8973 6.01541 20.9329 6.04222 20.9591C6.06902 20.9853 6.10528 21 6.14307 21H11.2988C11.3367 21 11.3731 20.9852 11.4 20.9588C11.4268 20.9324 11.4419 20.8965 11.4419 20.8592V13.6584C11.4418 13.6211 11.4268 13.5853 11.4 13.559L6.24428 8.4832C6.22429 8.46349 6.1988 8.45006 6.17105 8.44462C6.1433 8.43917 6.11453 8.44194 6.08838 8.45259C6.06224 8.46324 6.03988 8.48128 6.02415 8.50443C6.00842 8.52759 6.00001 8.55482 6 8.58268ZM7.2568 12.1294H8.22718C8.27991 12.1294 8.32265 12.2289 8.32265 12.3516V14.6099C8.32265 14.7327 8.27991 14.8321 8.22718 14.8321H7.2568C7.20407 14.8321 7.16133 14.7327 7.16133 14.6099V12.3516C7.16133 12.2289 7.20407 12.1294 7.2568 12.1294Z"
-                        fill-opacity="0.8" fill="#898989"></path>
-                    <path opacity="0.6"
-                        d="M16.0465 3.1538V20.8467C16.0465 20.8669 16.0422 20.8868 16.0339 20.9055C16.0256 20.9241 16.0134 20.941 15.998 20.9552C15.9827 20.9695 15.9644 20.9808 15.9443 20.9884C15.9243 20.9961 15.9028 21.0001 15.881 21H9.93252C9.88874 21 9.84676 20.9838 9.8158 20.9551C9.78485 20.9264 9.76746 20.8874 9.76746 20.8467V8.67798C9.76744 8.65785 9.77169 8.6379 9.77998 8.6193C9.78826 8.60069 9.80041 8.58378 9.81574 8.56953L15.7643 3.04534C15.7873 3.02375 15.8168 3.00901 15.8489 3.00301C15.881 2.99701 15.9143 3.00002 15.9446 3.01165C15.9748 3.02327 16.0007 3.043 16.0188 3.06831C16.037 3.09363 16.0466 3.12338 16.0465 3.1538ZM14.461 7.18605H12.9383C12.8555 7.18605 12.7885 7.30931 12.7885 7.46137V10.2596C12.7885 10.4116 12.8555 10.5349 12.9383 10.5349H14.461C14.5438 10.5349 14.6108 10.4116 14.6108 10.2596V7.46137C14.6108 7.30931 14.5438 7.18605 14.461 7.18605ZM14.461 11.3721H12.9383C12.8555 11.3721 12.7885 11.4183 12.7885 11.4753V12.5247C12.7885 12.5817 12.8555 12.6279 12.9383 12.6279H14.461C14.5438 12.6279 14.6108 12.5817 14.6108 12.5247V11.4753C14.6108 11.4183 14.5438 11.3721 14.461 11.3721Z"
-                        fill-opacity="0.6" fill="#464646"></path>
-                    <path opacity="0.8" fill-rule="evenodd" clip-rule="evenodd"
-                        d="M18.5581 10.2383V20.8788C18.5579 20.911 18.5463 20.9418 18.5256 20.9646C18.505 20.9873 18.4771 21.0001 18.4481 21.0001H14.4821C14.4529 21.0001 14.4249 20.9872 14.4043 20.9643C14.3837 20.9414 14.3721 20.9104 14.3721 20.878V14.6373C14.3721 14.605 14.3837 14.574 14.4043 14.5511L18.3702 10.1521C18.3856 10.1351 18.4052 10.1234 18.4265 10.1187C18.4479 10.114 18.47 10.1164 18.4901 10.1256C18.5102 10.1348 18.5274 10.1505 18.5395 10.1705C18.5516 10.1906 18.5581 10.2142 18.5581 10.2383ZM16.2078 14.3024H17.8468C17.9358 14.3024 18.008 14.3746 18.008 14.4636V16.1027C18.008 16.1917 17.9358 16.2639 17.8468 16.2639H16.2078C16.1187 16.2639 16.0465 16.1917 16.0465 16.1027V14.4636C16.0465 14.3746 16.1187 14.3024 16.2078 14.3024Z"
-                        fill="#DDDDDD"></path>
-                </g>
-            </svg>
-            <div class="flex flex-col gap-1 pb-2">
-                <h2 [routerLink]="['/vacancy',vacancy.vacancyId]"
-                    class="text-2xl font-semibold text-gray-800 hover:text-blue-600 cursor-pointer">{{vacancy.title}}
-                </h2>
-                <h2 class="text-xl text-gray-800">{{vacancy.role}}</h2>
-            </div>
-        </div>
-        <!-- Box Content -->
-        <div class="text-xl text-gray-800 mb-4 border-b border-gray-300 py-2 flex justify-between">
-            <div class="flex flex-col justify-between">
-                <h1 class="text-md font-semibold text-gray-500">Job type</h1>
-                <p>Full time</p>
-            </div>
-            <div class="flex flex-col justify-between">
-                <h1 class="text-md font-semibold text-gray-500">Salary</h1>
-                <p>{{vacancy.salary}}</p>
-            </div>
-            <div class="flex flex-col justify-between">
-                <h1 class="text-md font-semibold text-gray-500">Location</h1>
-                <p>{{vacancy.location}}</p>
-            </div>
-            <div class="flex flex-col justify-between">
-                <h1 class="text-md font-semibold text-gray-500">Experience</h1>
-                <p>{{vacancy.experienceMin}}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 m-8">
+        <div class="bg-[#B2C9AD] p-8 rounded-lg border border-[#40534C] shadow-lg" *ngFor="let vacancy of vacancies">
+            <!-- Box Title -->
+            <div class="flex items-center border-b border-[#677D6A] pb-6 gap-6">
+                <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <g>
+                        <path opacity="0.48"
+                            d="M6 8.58268V20.8601C6.00024 20.8973 6.01541 20.9329 6.04222 20.9591C6.06902 20.9853 6.10528 21 6.14307 21H11.2988C11.3367 21 11.3731 20.9852 11.4 20.9588C11.4268 20.9324 11.4419 20.8965 11.4419 20.8592V13.6584C11.4418 13.6211 11.4268 13.5853 11.4 13.559L6.24428 8.4832C6.22429 8.46349 6.1988 8.45006 6.17105 8.44462C6.1433 8.43917 6.11453 8.44194 6.08838 8.45259C6.06224 8.46324 6.03988 8.48128 6.02415 8.50443C6.00842 8.52759 6.00001 8.55482 6 8.58268ZM7.2568 12.1294H8.22718C8.27991 12.1294 8.32265 12.2289 8.32265 12.3516V14.6099C8.32265 14.7327 8.27991 14.8321 8.22718 14.8321H7.2568C7.20407 14.8321 7.16133 14.7327 7.16133 14.6099V12.3516C7.16133 12.2289 7.20407 12.1294 7.2568 12.1294Z"
+                            fill-opacity="0.8" fill="#898989"></path>
+                    </g>
+                </svg>
+                <div>
+                    <h2 [routerLink]="['/vacancy', vacancy.vacancyId]"
+                        class="text-2xl font-bold text-[#1A3636] hover:text-[#40534C] cursor-pointer">{{vacancy.title}}
+                    </h2>
+                    <p class="text-lg text-[#40534C]">{{vacancy.role}}</p>
+                </div>
             </div>
 
-        </div>
-
-        <!-- Box Actions -->
-        <div class="flex justify-between space-x-4">
-            <div class="rounded-lg p-2 bg-gray-200 text-gray-500">
-                Registrations closed on {{vacancy.deadline | date: 'longDate'}} - {{vacancy.deadline | date:
-                'shortTime'}}
+            <!-- Box Content -->
+            <div class="grid grid-cols-2 gap-6 text-[#1A3636] mt-6">
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Job type</h1>
+                    <p>Full time</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Salary</h1>
+                    <p>{{vacancy.salary}}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Location</h1>
+                    <p>{{vacancy.location}}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Experience</h1>
+                    <p>{{vacancy.experienceMin}}</p>
+                </div>
             </div>
-            <button [routerLink]="['/vacancy', vacancy.vacancyId]"
-                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none">
-                View More
-            </button>
+
+            <!-- Box Actions -->
+            <div class="flex justify-between items-center mt-6">
+                <div class="rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-sm">
+                    Registrations closed on {{vacancy.deadline | date: 'longDate'}} - {{vacancy.deadline | date:
+                    'shortTime'}}
+                </div>
+                <button [routerLink]="['/vacancy', vacancy.vacancyId]"
+                    class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C]">
+                    View More
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -1,22 +1,23 @@
-<div class="min-h-screen bg-yellow-200 p-6">
+<div class="min-h-screen bg-[#F5F5E9] p-6">
     <div class="p-6">
-        <div class="flex justify-center space-x-12 text-2xl">
-            <a [routerLink]="['/create_vacancy']" class="text-gray-700 hover:text-blue-500">Vacancy</a>
+        <div class="flex justify-center space-x-12 text-xl font-semibold">
+            <a [routerLink]="['/create_vacancy']" class="text-[#40534C] hover:text-[#1A3636]">Vacancy</a>
             <a [routerLink]="['/create-training-program']"
-                class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Training Program</a>
+                class="text-[#1A3636] border-b-4 border-[#1A3636] pb-1 hover:text-[#40534C]">Training Program</a>
         </div>
     </div>
 
-    <div class="max-w-screen-md mx-auto bg-white p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl mb-6 font-semibold">Create Training Program</h2>
+    <div class="max-w-screen-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-[#D6BD98]">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#1A3636]">Create Training Program</h2>
 
         <!-- Form starts here -->
-        <form class="space-y-4" #trainingForm="ngForm" (ngSubmit)="onSubmit(trainingForm)">
+        <form class="space-y-6" #trainingForm="ngForm" (ngSubmit)="onSubmit(trainingForm)">
 
             <!-- Title -->
             <div>
-                <label for="title" class="block text-sm font-semibold">Title</label>
-                <input id="title" [(ngModel)]="trainingProgram.title" name="title" class="w-full p-2 border rounded-lg"
+                <label for="title" class="block text-lg font-semibold text-[#40534C]">Title</label>
+                <input id="title" [(ngModel)]="trainingProgram.title" name="title"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     required />
                 <p *ngIf="trainingForm.form.controls['title']?.invalid && trainingForm.form.controls['title']?.touched"
                     class="text-red-500 text-sm">
@@ -26,9 +27,9 @@
 
             <!-- Training Type -->
             <div>
-                <label for="trainingType" class="block text-sm font-semibold">Training Type</label>
+                <label for="trainingType" class="block text-lg font-semibold text-[#40534C]">Training Type</label>
                 <select id="trainingType" [(ngModel)]="trainingProgram.trainingType" name="trainingType"
-                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     required>
                     <option value="" disabled>Select your type</option>
                     <option value="Induction Training">Induction Training</option>
@@ -44,9 +45,9 @@
 
             <!-- Select Vacancy -->
             <div>
-                <label for="vacancyId" class="block text-sm font-semibold">Vacancy</label>
+                <label for="vacancyId" class="block text-lg font-semibold text-[#40534C]">Vacancy</label>
                 <select id="vacancyId" [(ngModel)]="trainingProgram.vacancyId" name="vacancyId"
-                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     required>
                     <option value="" disabled>Select your vacancy</option>
                     <option *ngFor="let vacancy of vacancies" [value]="vacancy.vacancyId">{{ vacancy.title }}</option>
@@ -59,9 +60,10 @@
 
             <!-- Trainer -->
             <div>
-                <label for="trainer" class="block text-sm font-semibold">Trainer</label>
+                <label for="trainer" class="block text-lg font-semibold text-[#40534C]">Trainer</label>
                 <input [(ngModel)]="trainingProgram.trainer" id="trainer" name="trainer"
-                    class="w-full p-2 border rounded-lg" required />
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
                 <p *ngIf="trainingForm.form.controls['trainer']?.invalid && trainingForm.form.controls['trainer']?.touched"
                     class="text-red-500 text-sm">
                     Trainer is required.
@@ -70,9 +72,10 @@
 
             <!-- Location -->
             <div>
-                <label for="location" class="block text-sm font-semibold">Location</label>
+                <label for="location" class="block text-lg font-semibold text-[#40534C]">Location</label>
                 <input [(ngModel)]="trainingProgram.location" id="location" name="location"
-                    class="w-full p-2 border rounded-lg" required />
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
                 <p *ngIf="trainingForm.form.controls['location']?.invalid && trainingForm.form.controls['location']?.touched"
                     class="text-red-500 text-sm">
                     Location is required.
@@ -81,9 +84,10 @@
 
             <!-- Job Details -->
             <div>
-                <label for="content" class="block text-sm font-semibold">Training Details</label>
+                <label for="content" class="block text-lg font-semibold text-[#40534C]">Training Details</label>
                 <textarea [(ngModel)]="trainingProgram.content" id="content" name="content"
-                    class="w-full p-2 border rounded-lg" rows="4" required></textarea>
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    rows="4" required></textarea>
                 <p *ngIf="trainingForm.form.controls['content']?.invalid && trainingForm.form.controls['content']?.touched"
                     class="text-red-500 text-sm">
                     Training details are required.
@@ -91,22 +95,25 @@
             </div>
 
             <!-- Dates -->
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="startDate" class="block text-sm font-semibold">Start Date</label>
+                    <label for="startDate" class="block text-lg font-semibold text-[#40534C]">Start Date</label>
                     <input [(ngModel)]="trainingProgram.startDate" id="startDate" type="date" name="startDate"
-                        class="w-full p-2 border rounded-lg" required />
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
                 </div>
                 <div>
-                    <label for="endDate" class="block text-sm font-semibold">End Date</label>
+                    <label for="endDate" class="block text-lg font-semibold text-[#40534C]">End Date</label>
                     <input [(ngModel)]="trainingProgram.endDate" id="endDate" name="endDate" type="date"
-                        class="w-full p-2 border rounded-lg" required />
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
                 </div>
             </div>
 
             <!-- Submit Button -->
             <div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-6 rounded-lg w-full hover:bg-blue-600"
+                <button type="submit"
+                    class="bg-[#1A3636] text-[#D6BD98] py-3 px-6 rounded-lg w-full text-lg font-medium hover:bg-[#40534C] focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     [disabled]="trainingForm.invalid">
                     Create Training Program
                 </button>

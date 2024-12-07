@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
+<header class="flex items-center justify-between bg-[#B2C9AD] px-6 py-4 shadow-md">
     <!-- Logo Section -->
     <div class="flex items-center space-x-8">
         <div class="flex items-center">
@@ -6,17 +6,15 @@
                 [routerLink]="['/']" />
         </div>
         <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            class="w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F]" />
     </div>
 
-
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-gray-700">
-        <a [routerLink]="['/']" class="hover:underline">Home</a>
-        <a [routerLink]="['/vacancy-list']" class="hover:underline">Jobs</a>
-        <button [routerLink]="['/login']" class="px-4 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600">
+    <nav class="flex items-center ml-6 space-x-8 text-[#4B5945]">
+        <a [routerLink]="['/']" class="hover:underline hover:text-[#66785F]">Home</a>
+        <a [routerLink]="['/vacancy-list']" class="hover:underline hover:text-[#66785F]">Jobs</a>
+        <button [routerLink]="['/login']" class="px-4 py-2 text-white bg-[#66785F] rounded-full hover:bg-[#91AC8F]">
             Login
         </button>
     </nav>
-
 </header>

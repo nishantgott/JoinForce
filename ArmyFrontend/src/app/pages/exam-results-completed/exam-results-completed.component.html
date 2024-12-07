@@ -1,14 +1,13 @@
-<div class="min-h-screen p-6">
-    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Exam Results</h1>
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+    <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg border border-[#D6BD98]">
+        <h1 class="text-3xl font-bold mb-8 text-center text-[#1A3636]">Exam Results</h1>
 
-        <div class="p-6">
-            <div class="flex justify-center space-x-12 text-2xl">
-                <a [routerLink]="['/exam-results-change']" class="text-gray-700 hover:text-blue-500 ">Pending</a>
-
+        <!-- Tab Navigation -->
+        <div class="flex justify-center mb-8">
+            <div class="flex space-x-12 text-xl font-semibold">
+                <a [routerLink]="['/exam-results-change']" class="text-[#40534C] hover:text-[#1A3636]">Pending</a>
                 <a [routerLink]="['/exam-results-completed']"
-                    class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Completed</a>
-
+                    class="text-[#1A3636] border-b-4 border-[#1A3636] pb-1">Completed</a>
             </div>
         </div>
 
@@ -25,25 +24,19 @@
         <!-- Results List -->
         <div *ngIf="!loading && !error">
             <div *ngFor="let result of examResults"
-                class="mb-6 p-4 bg-white rounded-lg shadow-md border border-gray-200">
+                class="mb-6 p-6 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
 
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">ExamResult: {{ result.examId }}</h3>
+                <h3 class="text-2xl font-semibold text-[#1A3636] mb-4">Exam Result: {{ result.examId }}</h3>
 
-                <div class="mb-4">
-                    <span class="text-sm text-gray-600">User ID:</span>
-                    <span class="text-lg font-medium">{{ result.userId }}</span>
+                <div class="mb-4 text-lg text-[#1A3636]">
+                    <span class="font-semibold">User ID:</span> {{ result.userId }}
                 </div>
-
-                <div class="mb-4">
-                    <span class="text-sm text-gray-600">Current Score:</span>
-                    <span class="text-lg font-medium">{{ result.score }}</span>
+                <div class="mb-4 text-lg text-[#1A3636]">
+                    <span class="font-semibold">Current Score:</span> {{ result.score }}
                 </div>
-
-                <div class="mb-4">
-                    <span class="text-sm text-gray-600">Result Status:</span>
-                    <span class="text-lg font-medium">{{ result.resultStatus }}</span>
+                <div class="mb-4 text-lg text-[#1A3636]">
+                    <span class="font-semibold">Result Status:</span> {{ result.resultStatus }}
                 </div>
-
             </div>
         </div>
     </div>

@@ -1,83 +1,97 @@
-<div class="min-h-screen bg-yellow-200 p-6">
+<div class="min-h-screen bg-[#F5F5E9] p-6">
     <div class="p-6">
-        <div class="flex justify-center space-x-12 text-2xl">
+        <div class="flex justify-center space-x-12 text-xl font-semibold">
             <a [routerLink]="['vacancy_list']"
-                class="text-blue-500 font-semibold border-b-2 border-blue-500 hover:text-blue-700">Vacancy</a>
-            <a [routerLink]="['/create-training-program']" class="text-gray-700 hover:text-blue-500">Training
+                class="text-[#1A3636] border-b-4 border-[#1A3636] pb-1 hover:text-[#40534C]">Vacancy</a>
+            <a [routerLink]="['/create-training-program']" class="text-[#40534C] hover:text-[#1A3636]">Training
                 Program</a>
         </div>
     </div>
-    <div class="max-w-screen-md mx-auto bg-white p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-semibold mb-6">Create Vacancy</h2>
+    <div class="max-w-screen-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-[#D6BD98]">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#1A3636]">Create Vacancy</h2>
 
         <!-- Form starts here -->
-        <form (ngSubmit)="onSubmit()" #vacancyForm="ngForm" class="space-y-4">
+        <form (ngSubmit)="onSubmit()" #vacancyForm="ngForm" class="space-y-6">
 
             <!-- Title -->
             <div>
-                <label for="title" class="block text-sm font-semibold">Title</label>
-                <input id="title" name="title" [(ngModel)]="vacancy.title" class="w-full p-2 border rounded-lg"
+                <label for="title" class="block text-lg font-semibold text-[#40534C]">Title</label>
+                <input id="title" name="title" [(ngModel)]="vacancy.title"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     required />
             </div>
 
             <!-- Role -->
             <div>
-                <label for="role" class="block text-sm font-semibold">Role</label>
-                <input id="role" name="role" [(ngModel)]="vacancy.role" class="w-full p-2 border rounded-lg" required />
+                <label for="role" class="block text-lg font-semibold text-[#40534C]">Role</label>
+                <input id="role" name="role" [(ngModel)]="vacancy.role"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
             </div>
 
             <!-- Eligibility Criteria -->
             <div>
-                <label for="eligibilityCriteria" class="block text-sm font-semibold">Eligibility Criteria</label>
+                <label for="eligibilityCriteria" class="block text-lg font-semibold text-[#40534C]">Eligibility
+                    Criteria</label>
                 <input id="eligibilityCriteria" name="eligibilityCriteria" [(ngModel)]="vacancy.eligibilityCriteria"
-                    class="w-full p-2 border rounded-lg" required />
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
             </div>
 
             <!-- Location -->
             <div>
-                <label for="location" class="block text-sm font-semibold">Location</label>
-                <input id="location" name="location" [(ngModel)]="vacancy.location" class="w-full p-2 border rounded-lg"
+                <label for="location" class="block text-lg font-semibold text-[#40534C]">Location</label>
+                <input id="location" name="location" [(ngModel)]="vacancy.location"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     required />
             </div>
 
             <!-- Salary -->
             <div>
-                <label for="salary" class="block text-sm font-semibold">Salary</label>
+                <label for="salary" class="block text-lg font-semibold text-[#40534C]">Salary</label>
                 <input id="salary" name="salary" type="number" [(ngModel)]="vacancy.salary"
-                    class="w-full p-2 border rounded-lg" required />
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
             </div>
 
             <!-- Job Details -->
             <div>
-                <label for="jobDetails" class="block text-sm font-semibold">Job Details</label>
+                <label for="jobDetails" class="block text-lg font-semibold text-[#40534C]">Job Details</label>
                 <textarea id="jobDetails" name="jobDetails" [(ngModel)]="vacancy.jobDetails"
-                    class="w-full p-2 border rounded-lg" rows="4" required></textarea>
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    rows="4" required></textarea>
             </div>
 
             <!-- Experience -->
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="experienceMin" class="block text-sm font-semibold">Min Experience (years)</label>
+                    <label for="experienceMin" class="block text-lg font-semibold text-[#40534C]">Min Experience
+                        (years)</label>
                     <input id="experienceMin" name="experienceMin" type="number" [(ngModel)]="vacancy.experienceMin"
-                        class="w-full p-2 border rounded-lg" required />
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
                 </div>
                 <div>
-                    <label for="experienceMax" class="block text-sm font-semibold">Max Experience (years)</label>
+                    <label for="experienceMax" class="block text-lg font-semibold text-[#40534C]">Max Experience
+                        (years)</label>
                     <input id="experienceMax" name="experienceMax" type="number" [(ngModel)]="vacancy.experienceMax"
-                        class="w-full p-2 border rounded-lg" required />
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
                 </div>
             </div>
 
             <!-- Deadline -->
             <div>
-                <label for="deadline" class="block text-sm font-semibold">Deadline</label>
+                <label for="deadline" class="block text-lg font-semibold text-[#40534C]">Deadline</label>
                 <input id="deadline" name="deadline" type="datetime-local" [(ngModel)]="vacancy.deadline"
-                    class="w-full p-2 border rounded-lg" required />
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
             </div>
 
             <!-- Submit Button -->
             <div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-6 rounded-lg w-full hover:bg-blue-600"
+                <button type="submit"
+                    class="bg-[#1A3636] text-[#D6BD98] py-3 px-6 rounded-lg w-full text-lg font-medium hover:bg-[#40534C] focus:outline-none focus:ring-2 focus:ring-[#66785F]"
                     [disabled]="vacancyForm.invalid">
                     Create Vacancy
                 </button>
