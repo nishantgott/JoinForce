@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using YourProjectNamespace.Models;
 
 namespace ArmyBackend.Data
 {
@@ -24,5 +25,7 @@ namespace ArmyBackend.Data
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PlatformAccess> PlatformAccesses { get; set; }
         public DbSet<UserNotifications> UserNotifications { get; set; } 
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
     }
 }
