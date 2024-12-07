@@ -1,4 +1,5 @@
 using ArmyBackend.Repositories; // For IDocumentVerificationRepository
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -54,6 +55,7 @@ namespace ArmyBackend.Controllers
 
         // Update an existing verification
         [HttpPut("{verificationId}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> UpdateVerification(int verificationId, [FromBody] DocumentVerification updatedVerification)
         {
             var verification = await _verificationRepository.GetVerificationByIdAsync(verificationId);
@@ -71,6 +73,7 @@ namespace ArmyBackend.Controllers
 
         // Delete a verification
         [HttpDelete("{verificationId}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> DeleteVerification(int verificationId)
         {
             var verification = await _verificationRepository.GetVerificationByIdAsync(verificationId);

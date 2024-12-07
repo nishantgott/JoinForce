@@ -1,0 +1,25 @@
+.not-found-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.not-found-container h1 {
+    font-size: 48px;
+    color: #ff6347;
+}
+
+.not-found-container p {
+    font-size: 18px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { VacancyService } from '../../services/vacancy.service';
-import { HttpHeaders } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/login.service';
 
 @Component({
   selector: 'app-create-vacancy',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, HttpClientModule],
   templateUrl: './create-vacancy.component.html',
   styleUrl: './create-vacancy.component.css'
 })
@@ -52,7 +53,7 @@ export class CreateVacancyComponent implements OnInit {
 
 
 
-  constructor(private vacancyService: VacancyService, private userNotificationsService: UserNotificationsService, private router: Router) { }
+  constructor(private vacancyService: VacancyService, private userNotificationsService: UserNotificationsService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {

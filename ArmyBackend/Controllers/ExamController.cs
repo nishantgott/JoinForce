@@ -1,4 +1,5 @@
 using ArmyBackend.Repositories; // For IExamRepository
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace ArmyBackend.Controllers
 
         // Create a new exam
         [HttpPost]
+        [Authorize(Roles = "Admin, Examiner, Recruiter")]
         public async Task<IActionResult> CreateExam([FromBody] Exam exam)
         {
             await _examRepository.AddExamAsync(exam);
@@ -56,6 +58,7 @@ namespace ArmyBackend.Controllers
 
         // Update an existing exam
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Examiner")]
         public async Task<IActionResult> UpdateExam(int id, [FromBody] Exam updatedExam)
         {
             var exam = await _examRepository.GetExamByIdAsync(id);
@@ -73,6 +76,7 @@ namespace ArmyBackend.Controllers
 
         // Delete an exam
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Examiner")]
         public async Task<IActionResult> DeleteExam(int id)
         {
             var exam = await _examRepository.GetExamByIdAsync(id);

@@ -1,4 +1,5 @@
 using ArmyBackend.Repositories; // For ICandidateProfileRepository
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace ArmyBackend.Controllers
 
         // Get all profiles
         [HttpGet]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> GetAllProfiles()
         {
             var profiles = await _candidateProfileRepository.GetAllProfilesAsync();
@@ -66,6 +68,7 @@ namespace ArmyBackend.Controllers
 
         // Delete a profile
         [HttpDelete("{userId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProfile(int userId)
         {
             var profile = await _candidateProfileRepository.GetProfileByIdAsync(userId);

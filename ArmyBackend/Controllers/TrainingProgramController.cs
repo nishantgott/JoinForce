@@ -1,4 +1,5 @@
 using ArmyBackend.Repositories; // For ITrainingProgramRepository
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace ArmyBackend.Controllers
 
         // Create a new training program
         [HttpPost]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> CreateProgram([FromBody] TrainingProgram program)
         {
             await _trainingProgramRepository.AddProgramAsync(program);
@@ -54,6 +56,7 @@ namespace ArmyBackend.Controllers
 
         // Update an existing training program
         [HttpPut("{programId}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> UpdateProgram(int programId, [FromBody] TrainingProgram updatedProgram)
         {
             var program = await _trainingProgramRepository.GetProgramByIdAsync(programId);
@@ -74,6 +77,7 @@ namespace ArmyBackend.Controllers
 
         // Delete a training program
         [HttpDelete("{programId}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> DeleteProgram(int programId)
         {
             var program = await _trainingProgramRepository.GetProgramByIdAsync(programId);

@@ -9,17 +9,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
+// Add services to the container.
 builder.Services.AddControllers();
 
-// Add CORS
+// Add CORS to allow your Angular app to make requests
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins("http://localhost:4200") // Allow Angular app to make requests
+              .AllowAnyHeader() // Allow any header
+              .AllowAnyMethod(); // Allow any method (GET, POST, etc.)
     });
 });
 
@@ -40,7 +40,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Add Swagger
+// Add Swagger for API documentation
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -48,9 +48,35 @@ builder.Services.AddSwaggerGen(c =>
         Title = "Army Backend API",
         Version = "v1"
     });
+
+    // To make Swagger UI aware of the JWT Authorization
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer",
+        Description = "Please enter 'Bearer' followed by your token"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
-// Configure Database
+// Configure Database (Ensure you have a connection string in appsettings.json)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -67,16 +93,16 @@ builder.Services.AddScoped<IRecruitmentReportRepository, RecruitmentReportReposi
 builder.Services.AddScoped<ITestScheduleRepository, TestScheduleRepository>();
 builder.Services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
 
-// Build app
+// Build the app
 var app = builder.Build();
 
-// Add middleware pipeline
+// Add middleware to the pipeline
 app.UseHttpsRedirection();
-app.UseCors("AllowAngularApp");
-app.UseAuthentication(); // Ensure this comes before UseAuthorization
+app.UseCors("AllowAngularApp"); // Make sure this is set before routing
+app.UseAuthentication(); // Ensure authentication comes before authorization
 app.UseAuthorization();
 
-// Configure Swagger
+// Configure Swagger UI for development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,4 +1,7 @@
 using ArmyBackend.Repositories; // For IVacancyRepository
+using Microsoft.AspNetCore.Authorization;
+
+// using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -45,6 +48,7 @@ namespace ArmyBackend.Controllers
 
         // Update an existing vacancy
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> UpdateVacancy(int id, [FromBody] Vacancy updatedVacancy)
         {
             var vacancy = await _vacancyRepository.GetVacancyByIdAsync(id);
@@ -90,6 +94,7 @@ namespace ArmyBackend.Controllers
 
         // Delete a vacancy
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Recruiter")]
         public async Task<IActionResult> DeleteVacancy(int id)
         {
             var vacancy = await _vacancyRepository.GetVacancyByIdAsync(id);

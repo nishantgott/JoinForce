@@ -1,4 +1,5 @@
 using ArmyBackend.Repositories; // For IEvaluationReportRepository
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -54,6 +55,7 @@ namespace ArmyBackend.Controllers
 
         // Update an existing evaluation report
         [HttpPut("{reportId}")]
+        [Authorize(Roles = "Admin, MedicalOfficer")]
         public async Task<IActionResult> UpdateReport(int reportId, [FromBody] EvaluationReport updatedReport)
         {
             // Retrieve the existing report
@@ -85,6 +87,7 @@ namespace ArmyBackend.Controllers
 
         // Delete an evaluation report
         [HttpDelete("{reportId}")]
+        [Authorize(Roles = "Admin, MedicalOfficer")]
         public async Task<IActionResult> DeleteReport(int reportId)
         {
             var report = await _evaluationReportRepository.GetReportByIdAsync(reportId);

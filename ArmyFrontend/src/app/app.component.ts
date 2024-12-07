@@ -11,11 +11,12 @@ import { HeaderMedicalOfficerComponent } from "./components/header-medical-offic
 import { HeaderExaminerComponent } from "./components/header-examiner/header-examiner.component";
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { HeaderLoggedOutComponent } from './components/header-logged-out/header-logged-out.component';
+import { TestComponent } from "./test/test.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, SignupComponent, CandidateCardComponent, CommonModule, HeaderCandidateComponent, HeaderRecruiterComponent, HeaderMedicalOfficerComponent, HeaderExaminerComponent, HeaderAdminComponent, HeaderLoggedOutComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, SignupComponent, CandidateCardComponent, CommonModule, HeaderCandidateComponent, HeaderRecruiterComponent, HeaderMedicalOfficerComponent, HeaderExaminerComponent, HeaderAdminComponent, HeaderLoggedOutComponent, TestComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

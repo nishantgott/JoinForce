@@ -27,12 +27,39 @@ export class AuthService {
     }
   }
 
+  getRoles(): string[] {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token); // You need to implement decodeToken
+      return decodedToken?.roles || [];
+    }
+    return [];
+  }
+
+  // Example method to decode the JWT token
+  private decodeToken(token: string): any {
+    const payload = token.split('.')[1]; // Get the payload part of the JWT
+    const decoded = atob(payload); // Decode base64
+    return JSON.parse(decoded); // Return parsed JSON payload
+  }
+
+  // Check if the user has a specific role
+  hasRole(role: string): boolean {
+    const roles = this.getRoles();
+    return roles.includes(role);
+  }
+
   getUserByUsername(username: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/username/${username}`);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwtToken');
+    let token: string | null = null;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('jwtToken');
+    }
+    // return localStorage.getItem('jwtToken');
+    return token;
   }
 
   getUserDetails(token: string): Observable<any> {
