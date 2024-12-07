@@ -1,16 +1,23 @@
 using ArmyBackend.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RestSharp;
+using RestSharp.Authenticators;
+using System;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
 public class UserNotificationsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public UserNotificationsController(ApplicationDbContext context)
+    public UserNotificationsController(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
 
     // Get notifications for a specific user
@@ -32,62 +39,100 @@ public class UserNotificationsController : ControllerBase
 
     // Add notifications to a user
     [HttpPost]
-public async Task<IActionResult> AddUserNotifications(int userId, [FromBody] Notification notification)
-{
-    if (notification == null)
+    public async Task<IActionResult> AddUserNotifications(int userId, [FromBody] Notification notification)
     {
-        return BadRequest("Notification data is required.");
-    }
-
-    // Check if the user exists
-    var userNotifications = await _context.UserNotifications
-        .Include(un => un.Notifications)
-        .FirstOrDefaultAsync(un => un.UserId == userId);
-
-    if (userNotifications == null)
-    {
-        // If no UserNotifications entry exists for the user, create a new one
-        userNotifications = new UserNotifications
+        if (notification == null)
         {
-            UserId = userId,
-            Notifications = new List<Notification>
+            return BadRequest("Notification data is required.");
+        }
+
+        // Check if the user exists
+        var userNotifications = await _context.UserNotifications
+            .Include(un => un.Notifications)
+            .FirstOrDefaultAsync(un => un.UserId == userId);
+
+        if (userNotifications == null)
+        {
+            // If no UserNotifications entry exists for the user, create a new one
+            userNotifications = new UserNotifications
             {
-                new Notification
+                UserId = userId,
+                Notifications = new List<Notification>
                 {
-                    UserId = userId,
-                    Message = notification.Message,
-                    DateSent = notification.DateSent,
-                    NotificationType = notification.NotificationType,
-                    ReadStatus = false
+                    new Notification
+                    {
+                        UserId = userId,
+                        Message = notification.Message,
+                        DateSent = notification.DateSent,
+                        NotificationType = notification.NotificationType,
+                        ReadStatus = false
+                    }
                 }
-            }
-        };
+            };
 
-        // Add new UserNotifications entry
-        _context.UserNotifications.Add(userNotifications);
-    }
-    else
-    {
-        // If UserNotifications entry exists, add the new notification
-        userNotifications.Notifications.Add(new Notification
+            // Add new UserNotifications entry
+            _context.UserNotifications.Add(userNotifications);
+        }
+        else
         {
-            UserId = userId,
-            Message = notification.Message,
-            DateSent = notification.DateSent,
-            NotificationType = notification.NotificationType,
-            ReadStatus = false
+            // If UserNotifications entry exists, add the new notification
+            userNotifications.Notifications.Add(new Notification
+            {
+                UserId = userId,
+                Message = notification.Message,
+                DateSent = notification.DateSent,
+                NotificationType = notification.NotificationType,
+                ReadStatus = false
+            });
+
+            // Update the existing UserNotifications entry with the new notification
+            _context.UserNotifications.Update(userNotifications);
+        }
+
+        // Save the changes to the database
+        await _context.SaveChangesAsync();
+
+        // Mailgun integration for email sending
+        bool emailSent = await SendEmailUsingMailgun(notification.Message, userId);
+
+        if (emailSent)
+        {
+            return CreatedAtAction(nameof(GetUserNotifications), new { userId = userId }, userNotifications);
+        }
+        else
+        {
+            return StatusCode(500, "Failed to send email.");
+        }
+    }
+
+    private async Task<bool> SendEmailUsingMailgun(string message, int userId)
+    {
+        // Get Mailgun configuration values from the app settings
+        var apiKey = _configuration["Mailgun:ApiKey"];
+        var domain = _configuration["Mailgun:Domain"];
+        var fromEmail = _configuration["Mailgun:FromEmail"];
+        var fromName = _configuration["Mailgun:FromName"];
+
+        var client = new RestClient(new RestClientOptions($"https://api.mailgun.net/v3/{domain}/messages")
+        {
+            Authenticator = new HttpBasicAuthenticator("api", apiKey)
         });
 
-        // Update the existing UserNotifications entry with the new notification
-        _context.UserNotifications.Update(userNotifications);
+        // Here, we assume that you have user email from the database, replace with actual data
+        var userEmail = "nishantgk2004@gmail.com"; // Replace with actual email from the user
+
+        var request = new RestRequest();
+        request.AddParameter("from", $"{fromName} <{fromEmail}>");
+        request.AddParameter("to", "nishantgk2004@gmail.com"); // Use actual user's email
+        request.AddParameter("subject", "New Notification");
+        request.AddParameter("text", message);
+        request.AddParameter("html", $"<p>{message}</p>");
+
+        var response = await client.ExecutePostAsync(request);
+
+        // Check response status code
+        return response.StatusCode == System.Net.HttpStatusCode.OK;
     }
-
-    // Save the changes to the database
-    await _context.SaveChangesAsync();
-
-    return CreatedAtAction(nameof(GetUserNotifications), new { userId = userId }, userNotifications);
-}
-
 
     // Send notification to all users
     [HttpPost("send-to-all")]

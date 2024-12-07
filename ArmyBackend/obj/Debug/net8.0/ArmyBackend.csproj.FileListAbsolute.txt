@@ -219,6 +219,7 @@
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Microsoft.SqlServer.Server.dll
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Mono.TextTemplating.dll
+/Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/RestSharp.dll
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/nishantg/Downloads/JoinForce/ArmyBackend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
