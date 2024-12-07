@@ -2,3 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this to your global styles */
+@import 'swiper/swiper-bundle.css';

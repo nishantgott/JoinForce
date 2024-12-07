@@ -28,9 +28,11 @@ import { CreateTrainingProgramComponent } from './pages/create-training-program/
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { RecruiterVacancyListComponent } from './recruiter-vacancy-list/recruiter-vacancy-list.component';
 import { ReportComponent } from './pages/report/report.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 export const routes: Routes = [
+    { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'vacancy/:id', component: VacancyComponent },

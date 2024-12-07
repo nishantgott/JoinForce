@@ -1,4 +1,5 @@
-<header class="flex items-center justify-between bg-[#B2C9AD] px-6 py-4 shadow-md">
+<header class="flex items-center justify-between bg-[#B2C9AD] px-6 py-4 shadow-md"
+    style="background-image: url('https://storage.needpix.com/rsynced_images/combat-pattern-background.jpg'); background-size: cover; background-position: center;">
     <!-- Logo Section -->
     <div class="flex items-center space-x-8">
         <div class="flex items-center">
@@ -6,23 +7,23 @@
                 class="w-20 hover:cursor-pointer" />
         </div>
         <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F]" />
+            class="w-64 px-4 py-2 border border-[#91AC8F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F] bg-white bg-opacity-75 text-black" />
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-[#4B5945]">
-        <a [routerLink]="['/candidate-profile-list']" class="hover:underline hover:text-[#66785F]">Candidates</a>
-        <a [routerLink]="['/application-review-list']" class="hover:underline hover:text-[#66785F]">Reviews</a>
-        <a [routerLink]="['create-evaluation-report']" class="hover:underline hover:text-[#66785F]">Reports</a>
-        <a [routerLink]="['/exam-results-change']" class="hover:underline hover:text-[#66785F]">Exams</a>
-        <a [routerLink]="['/vacancy-list']" class="hover:underline hover:text-[#66785F]">Jobs</a>
-        <a [routerLink]="['/notifications']" class="hover:underline hover:text-[#66785F]">Notifications</a>
+    <nav class="flex items-center ml-6 space-x-8 text-white">
+        <a [routerLink]="['/candidate-profile-list']" class="hover:underline hover:text-[#91AC8F]">Candidates</a>
+        <a [routerLink]="['/application-review-list']" class="hover:underline hover:text-[#91AC8F]">Reviews</a>
+        <a [routerLink]="['create-evaluation-report']" class="hover:underline hover:text-[#91AC8F]">Reports</a>
+        <a [routerLink]="['/exam-results-change']" class="hover:underline hover:text-[#91AC8F]">Exams</a>
+        <a [routerLink]="['/vacancy-list']" class="hover:underline hover:text-[#91AC8F]">Jobs</a>
+        <a [routerLink]="['/notifications']" class="hover:underline hover:text-[#91AC8F]">Notifications</a>
 
         <!-- Practice Link with Dropdown -->
         <div class="relative border-2 border-[#91AC8F] rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
             (click)="toggleDropdown($event)">
-            <div class="flex">
-                <a class="text-[#4B5945]">
+            <div class="flex items-center">
+                <a class="text-white">
                     {{user.username}}
                 </a>
 
@@ -44,10 +45,10 @@
 
             <!-- Dropdown Menu -->
             <div *ngIf="isDropdownVisible"
-                class="absolute right-0 mt-2 bg-[#B2C9AD] border-2 border-[#66785F] rounded-lg shadow-lg w-40 text-sm z-10">
+                class="absolute right-0 mt-2 bg-[#91AC8F] border-2 border-[#B2C9AD] rounded-lg shadow-lg w-40 text-sm z-10">
                 <a [routerLink]="['/candidate-profile', user.userId]"
-                    class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Profile</a>
-                <a (click)="logout()" class="block px-4 py-2 text-[#4B5945] hover:bg-[#91AC8F] hover:text-[#B2C9AD]">Log
+                    class="block px-4 py-2 text-white hover:bg-[#B2C9AD] hover:text-[#1A3636]">Profile</a>
+                <a (click)="logout()" class="block px-4 py-2 text-white hover:bg-[#B2C9AD] hover:text-[#1A3636]">Log
                     Out</a>
             </div>
         </div>
