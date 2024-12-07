@@ -1,0 +1,15 @@
+.carousel-container {
+    position: relative;
+}
+
+.carousel-container .absolute {
+    position: absolute;
+}
+
+.carousel-container span {
+    transition: background-color 0.3s;
+}
+
+.carousel-container {
+    background-color: #D6BD98;
+}

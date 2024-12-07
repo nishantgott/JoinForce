@@ -3,6 +3,8 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
+import { SwiperModule } from 'swiper/angular';
+
 
 @Component({
   selector: 'app-header-candidate',
