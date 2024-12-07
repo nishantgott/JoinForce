@@ -16,6 +16,7 @@ import { FormsModule } from "@angular/forms";
 })
 
 export class VacancyComponent implements OnInit {
+  wowId: number = 0;
   vacancy: any; // Vacancy data
   userId: number = 0;
   vacancyId: number = 0;
@@ -97,6 +98,7 @@ export class VacancyComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    this.wowId = +id!;
     if (id) {
       this.getVacancyDetails(+id); // Ensure vacancyId is a number
     }
