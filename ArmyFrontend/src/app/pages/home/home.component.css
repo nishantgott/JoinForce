@@ -13,3 +13,23 @@
 .carousel-container {
     background-color: #D6BD98;
 }
+
+
+@keyframes colorToggle {
+    0% {
+        color: white;
+    }
+
+    50% {
+        color: #D6BD98;
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+.color-toggle p {
+    animation: colorToggle 1s infinite;
+    /* 1 second duration, repeats infinitely */
+}

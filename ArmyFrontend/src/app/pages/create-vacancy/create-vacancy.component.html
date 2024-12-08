@@ -24,10 +24,19 @@
             <!-- Role -->
             <div>
                 <label for="role" class="block text-lg font-semibold text-[#40534C]">Role</label>
-                <input id="role" name="role" [(ngModel)]="vacancy.role"
+                <select id="role" name="role" [(ngModel)]="vacancy.role"
                     class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
-                    required />
+                    required>
+                    <option value="" disabled>Select a role</option>
+                    <option value="Combat">Combat</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Medical and Healthcare">Medical and Healthcare</option>
+                    <option value="Intelligence and Cyber">Intelligence and Cyber</option>
+                    <option value="Aviation">Aviation</option>
+                    <option value="Research and Development">Research and Development</option>
+                </select>
             </div>
+
 
             <!-- Eligibility Criteria -->
             <div>

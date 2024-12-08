@@ -47,7 +47,7 @@ namespace ArmyBackend.Controllers
 
         // Create a new exam
         [HttpPost]
-        [Authorize(Roles = "Admin, Examiner, Recruiter")]
+        // [Authorize(Roles = "Admin, Examiner, Recruiter")]
         public async Task<IActionResult> CreateExam([FromBody] Exam exam)
         {
             await _examRepository.AddExamAsync(exam);

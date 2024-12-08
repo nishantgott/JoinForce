@@ -29,7 +29,6 @@ namespace ArmyBackend.Controllers
         }
 
         [HttpGet("{id}")]
-        // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);

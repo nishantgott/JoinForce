@@ -94,7 +94,7 @@ export class ExamResultsChangeComponent {
     this.examResultService.updateExamResult(examResult.resultId, examResult).subscribe(
       (result) => {
         console.log('Exam Result Updated Successfully:', result);
-        alert('Exam Result Updated Successfully!');
+        // alert('Exam Result Updated Successfully!');
 
         // After updating the exam result, update the application status
         this.updateApplicationStatus(examResult, status);
@@ -135,7 +135,7 @@ export class ExamResultsChangeComponent {
               this.applicationService.updateApplication(applicationId, application).subscribe(
                 () => {
                   console.log('Application status updated successfully!');
-                  alert('Application status updated successfully!');
+                  // alert('Application status updated successfully!');
                 },
                 (error) => {
                   console.error('Error updating application status:', error);
@@ -164,7 +164,7 @@ export class ExamResultsChangeComponent {
                     this.notification.message = `Your application (${applicationId}) has been shortlisted. Please schedule your Physical and Medical tests.`;
                     this.createAndSendNotification();
                     console.log(res)
-                    alert('Test schedule created successfully!');
+                    // alert('Test schedule created successfully!');
                   },
                   (error) => {
                     console.error('Error creating test schedule:', error);
@@ -184,7 +184,7 @@ export class ExamResultsChangeComponent {
                   (res) => {
                     console.log('Test schedule created successfully!');
                     console.log(res)
-                    alert('Test schedule created successfully!');
+                    // alert('Test schedule created successfully!');
                   },
                   (error) => {
                     console.error('Error creating test schedule:', error);

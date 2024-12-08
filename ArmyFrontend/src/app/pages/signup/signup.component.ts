@@ -129,7 +129,7 @@ export class SignupComponent {
     this.candidateProfileService.createProfile(this.candidateProfile).subscribe({
       next: (profile) => {
         console.log('Candidate profile created successfully:', profile);
-        alert('Candidate profile created successfully!');
+        // alert('Candidate profile created successfully!');
       },
       error: (error) => {
         console.error('Error creating candidate profile:', error);

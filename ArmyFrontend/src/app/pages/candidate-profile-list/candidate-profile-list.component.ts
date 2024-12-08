@@ -23,6 +23,7 @@ export class CandidateProfileListComponent {
     this.userService.getAllUsers().subscribe(
       (users) => {
         this.users = users;
+        this.users = this.users.filter((user) => user.role === 'Candidate');
         console.log(users);
       },
       (error) => {
