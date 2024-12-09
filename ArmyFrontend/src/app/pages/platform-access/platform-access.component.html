@@ -1,0 +1,34 @@
+<div class="min-h-screen p-6 bg-[#F5F5E9]">
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-[#D6BD98]">
+        <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#1A3636]">Platform Access Details</h1>
+
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto border-collapse border border-[#D6BD98]">
+                <thead>
+                    <tr class="bg-[#B2C9AD]">
+                        <th class="px-4 py-2 border border-[#677D6A] text-left text-[#1A3636] font-semibold">Platform ID
+                        </th>
+                        <th class="px-4 py-2 border border-[#677D6A] text-left text-[#1A3636] font-semibold">Username
+                        </th>
+                        <th class="px-4 py-2 border border-[#677D6A] text-left text-[#1A3636] font-semibold">Device Type
+                        </th>
+                        <th class="px-4 py-2 border border-[#677D6A] text-left text-[#1A3636] font-semibold">Last Access
+                            Date</th>
+                        <th class="px-4 py-2 border border-[#677D6A] text-left text-[#1A3636] font-semibold">Preferred
+                            Language</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let access of platformAccesses" class="odd:bg-[#F5F5E9] even:bg-white">
+                        <td class="px-4 py-2 border border-[#677D6A] text-[#1A3636]">{{ access.platformId }}</td>
+                        <td class="px-4 py-2 border border-[#677D6A] text-[#1A3636]">{{ access.username }}</td>
+                        <td class="px-4 py-2 border border-[#677D6A] text-[#1A3636]">{{ access.deviceType }}</td>
+                        <td class="px-4 py-2 border border-[#677D6A] text-[#1A3636]">{{ access.lastAccessDate | date:
+                            'medium' }}</td>
+                        <td class="px-4 py-2 border border-[#677D6A] text-[#1A3636]">{{ access.preferredLanguage }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

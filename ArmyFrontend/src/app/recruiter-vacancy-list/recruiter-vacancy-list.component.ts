@@ -30,7 +30,7 @@ export class RecruiterVacancyListComponent {
     this.vacancyService.getAllVacancies().subscribe(
       (data: any[]) => {
         this.vacancies = data;
-        this.vacancies = this.vacancies.filter(v => v.postedBy === this.user?.userId);
+        if (this.user.role == 'Recruiter') this.vacancies = this.vacancies.filter(v => v.postedBy === this.user?.userId);
         console.log(this.vacancies);
       },
       (error) => {

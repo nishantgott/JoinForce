@@ -3,19 +3,23 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
+import { UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-header-admin',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header-admin.component.html',
-  styleUrl: './header-admin.component.css'
+  styleUrls: ['./header-admin.component.css']
 })
 export class HeaderAdminComponent {
   isDropdownVisible: boolean = false;
+  isHeaderCollapsed: boolean = false;
   user: any;
+  unread: number = 0;
+  searchTerm: string = '';
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private userNotificationsService: UserNotificationsService) { }
 
   logout(): void {
     this.router.navigate(['/']).then(() => {
@@ -25,7 +29,6 @@ export class HeaderAdminComponent {
     });
   }
 
-  searchTerm: string = '';
   onSearch(): void {
     this.router.navigate(['/search', this.searchTerm]);
   }
@@ -37,25 +40,31 @@ export class HeaderAdminComponent {
         this.user = JSON.parse(storedUser);
       }
     }
+    this.userNotificationsService.getUserNotifications(this.user.userId).subscribe(
+      (userNotifications) => {
+        this.unread = userNotifications.notifications.filter(notification => !notification.readStatus).length;
+      },
+      (error) => {
+        console.error('Error fetching user notifications:', error);
+      }
+    );
   }
 
-  // This will be used to listen for clicks outside the dropdown
-  @ViewChild('practiceDropdown') practiceDropdown!: ElementRef;
-
-  // Toggle dropdown visibility
   toggleDropdown(event: MouseEvent): void {
-    // Prevents event from bubbling up and triggering the outside click handler
     event.stopPropagation();
     this.isDropdownVisible = !this.isDropdownVisible;
   }
 
-  // Close the dropdown if clicked outside
+  toggleHeader(): void {
+    this.isHeaderCollapsed = !this.isHeaderCollapsed;
+  }
+
+  @ViewChild('practiceDropdown') practiceDropdown!: ElementRef;
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     if (this.practiceDropdown && !this.practiceDropdown.nativeElement.contains(event.target)) {
       this.isDropdownVisible = false;
     }
   }
-
-
 }

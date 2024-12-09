@@ -4,11 +4,12 @@ import { ExamService } from '../../services/exam.service';
 import { ApplicationService } from '../../services/application.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ProfileIconComponent } from '../../components/profile-icon/profile-icon.component';
 
 @Component({
   selector: 'app-exam-results-completed',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProfileIconComponent],
   templateUrl: './exam-results-completed.component.html',
   styleUrl: './exam-results-completed.component.css'
 })

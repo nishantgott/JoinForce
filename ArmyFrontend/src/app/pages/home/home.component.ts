@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { ProfileIconComponent } from "../../components/profile-icon/profile-icon.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, RouterModule, CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule, ProfileIconComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -14,6 +15,8 @@ import { Router, RouterModule } from '@angular/router';
 export class HomeComponent {
   currentSlide: number = 0;
   searchTerm: string = '';
+
+  constructor(private router: Router) { }
 
   slides = [
     {
@@ -46,6 +49,7 @@ export class HomeComponent {
   }
 
   onSearch(): void {
+    // this.router.navigate(`/search/${this.searchTerm}`);
     console.log(`Searching for: ${this.searchTerm}`);
   }
 }

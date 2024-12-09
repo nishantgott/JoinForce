@@ -1,17 +1,22 @@
-<header class="flex items-center justify-between px-6 py-4 shadow-md"
+<header class="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-[#B2C9AD] px-4 sm:px-6 py-4 shadow-md"
     style="background-image: url('https://storage.needpix.com/rsynced_images/combat-pattern-background.jpg'); background-size: cover; background-position: center;">
-    <!-- Logo Section -->
-    <div class="flex items-center space-x-8">
-        <div class="flex items-center">
-            <img src="/military-tank.svg" alt="Military Tank Logo" class="w-20 hover:cursor-pointer"
+    <!-- Logo and Search Section -->
+    <div class="flex items-center justify-between w-full sm:w-auto">
+        <div class="flex items-center space-x-4">
+            <img src="/military-tank.svg" alt="Military Tank Logo" class="w-16 sm:w-20 hover:cursor-pointer"
                 [routerLink]="['/']" />
+            <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
+                class="hidden sm:block w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F] bg-white bg-opacity-75" />
         </div>
-        <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-[#66785F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F] bg-white bg-opacity-75" />
+        <button class="text-white bg-[#1A3636] px-4 py-2 rounded-lg sm:hidden focus:outline-none"
+            (click)="toggleHeader()">
+            Menu
+        </button>
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-white">
+    <nav class="flex-col sm:flex-row sm:items-center sm:ml-6 sm:space-x-8 text-white space-y-4 sm:space-y-0 mt-4 sm:mt-0"
+        [ngClass]="{ 'hidden sm:flex': !isHeaderCollapsed, 'flex': isHeaderCollapsed }">
         <a [routerLink]="['/']" class="hover:underline hover:text-[#91AC8F]">Home</a>
         <a [routerLink]="['/vacancy-list']" class="hover:underline hover:text-[#91AC8F]">Jobs</a>
         <button [routerLink]="['/login']" class="px-4 py-2 bg-[#66785F] rounded-full hover:bg-[#91AC8F] text-white">

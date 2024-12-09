@@ -24,8 +24,15 @@
         <!-- Results List -->
         <div *ngIf="!loading && !error">
             <div *ngFor="let result of examResults"
-                class="mb-6 p-6 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
-                <h3 class="text-2xl font-semibold text-[#1A3636] mb-4">Exam ID: {{ result.examId }}</h3>
+                class="relative mb-6 p-6 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
+
+                <div class="absolute top-4 right-4">
+                    <app-profile-icon [actualUserId]="result.userId"></app-profile-icon>
+                </div>
+
+                <div class="flex justify-between">
+                    <h3 class="text-2xl font-semibold text-[#1A3636] mb-4">Exam ID: {{ result.examId }}</h3>
+                </div>
 
                 <div class="mb-4 text-lg text-[#1A3636]">
                     <span class="font-semibold">User ID:</span> {{ result.userId }}

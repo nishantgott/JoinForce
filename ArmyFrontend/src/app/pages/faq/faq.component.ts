@@ -4,11 +4,12 @@ import { Question, QuestionService } from '../../services/question.service';
 import { AnswerService } from '../../services/answer.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProfileIconComponent } from "../../components/profile-icon/profile-icon.component";
 
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePipe],
+  imports: [CommonModule, FormsModule, DatePipe, ProfileIconComponent],
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.css'],
 })

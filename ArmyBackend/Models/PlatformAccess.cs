@@ -8,4 +8,6 @@ public class PlatformAccess
     public string DeviceType { get; set; } // e.g., Mobile, Desktop
     public DateTime LastAccessDate { get; set; }
     public string PreferredLanguage { get; set; }
+
+    public string Username { get; set; }
 }

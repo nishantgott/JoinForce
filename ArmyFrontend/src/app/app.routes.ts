@@ -32,6 +32,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RoleGuard } from './role.guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { PlatformAccessComponent } from './pages/platform-access/platform-access.component';
 
 
 export const routes: Routes = [
@@ -65,5 +66,6 @@ export const routes: Routes = [
     { path: 'my-vacancies', component: RecruiterVacancyListComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
     { path: 'report/:id', component: ReportComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
     { path: 'vacancy/:vacancyId/faq', component: FaqComponent },
+    { path: 'platform-access', component: PlatformAccessComponent, canActivate: [RoleGuard], data: { roles: ['Admin'] } },
     { path: '**', component: NotFoundComponent },
 ];

@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   // Example method to decode the JWT token
-  private decodeToken(token: string): any {
+  decodeToken(token: string): any {
     const payload = token.split('.')[1]; // Get the payload part of the JWT
     const decoded = atob(payload); // Decode base64
     return JSON.parse(decoded); // Return parsed JSON payload
@@ -67,9 +67,18 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-
     return this.http.get<any>(this.profileUrl, { headers });
   }
+
+  getUserDetails2(): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/api/user`, { headers });
+  }
+
 
   getUser(): any {
     const user = localStorage.getItem('user');

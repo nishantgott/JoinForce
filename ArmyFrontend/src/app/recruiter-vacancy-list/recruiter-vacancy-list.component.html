@@ -1,13 +1,14 @@
 <div class="min-h-screen p-6 bg-[#F5F5E9]">
     <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-[#D6BD98]">
-        <h1 class="text-2xl font-bold mb-6 text-center text-[#1A3636]">My Vacancies</h1>
+        <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center text-[#1A3636]">My Vacancies</h1>
 
         <div *ngFor="let vacancy of vacancies"
-            class="mb-6 p-8 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
-            <!-- Box Title -->
-            <div class="flex items-center justify-between border-b border-[#677D6A] pb-4">
-                <div class="flex gap-6 items-center">
-                    <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+            class="mb-6 p-6 md:p-8 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
+            <div
+                class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#677D6A] pb-4">
+                <div class="flex gap-4 items-start sm:items-center">
+                    <svg class="w-10 h-10 md:w-12 md:h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24"
+                        aria-hidden="true">
                         <g>
                             <path opacity="0.48" d="M6 8.58268V20.8601C6.00024 20.8973..." fill-opacity="0.8"
                                 fill="#898989"></path>
@@ -15,19 +16,18 @@
                     </svg>
                     <div>
                         <h2 [routerLink]="['/vacancy', vacancy.vacancyId]"
-                            class="text-2xl font-bold text-[#1A3636] hover:text-[#40534C] cursor-pointer">
+                            class="text-xl md:text-2xl font-bold text-[#1A3636] hover:text-[#40534C] cursor-pointer">
                             {{ vacancy.title }}
                         </h2>
-                        <p class="text-xl text-[#40534C]">{{ vacancy.role }}</p>
+                        <p class="text-lg md:text-xl text-[#40534C]">{{ vacancy.role }}</p>
                     </div>
                 </div>
-                <span class="rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-md">
+                <span class="mt-4 sm:mt-0 rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-md">
                     Vacancy ID: {{ vacancy.vacancyId }}
                 </span>
             </div>
 
-            <!-- Box Content -->
-            <div class="grid grid-cols-2 gap-6 text-[#1A3636] text-lg mt-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-[#1A3636] text-lg mt-6">
                 <div>
                     <h1 class="text-md font-semibold text-[#40534C]">Job Type</h1>
                     <p>Full time</p>
@@ -46,18 +46,17 @@
                 </div>
             </div>
 
-            <!-- Box Actions -->
-            <div class="flex justify-between items-center mt-6">
-                <div class="rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-md">
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-6">
+                <div class="rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-center sm:text-left text-md">
                     Registrations closed on {{ vacancy.deadline | date: 'longDate' }}
                 </div>
-                <div class="flex gap-4">
+                <div class="flex gap-4 mt-4 sm:mt-0">
                     <button [routerLink]="['/analytics', vacancy.vacancyId]"
-                        class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg font-medium hover:bg-[#40534C] focus:outline-none">
+                        class="px-4 md:px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg font-medium hover:bg-[#40534C] focus:outline-none">
                         Analytics
                     </button>
                     <button [routerLink]="['/vacancy', vacancy.vacancyId]"
-                        class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg font-medium hover:bg-[#40534C] focus:outline-none">
+                        class="px-4 md:px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg font-medium hover:bg-[#40534C] focus:outline-none">
                         View More
                     </button>
                 </div>

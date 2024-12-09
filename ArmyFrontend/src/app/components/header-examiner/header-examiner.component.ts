@@ -3,32 +3,23 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
+import { UserNotificationsService } from '../../services/user-notifications.service';
 
 @Component({
   selector: 'app-header-examiner',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header-examiner.component.html',
-  styleUrl: './header-examiner.component.css'
+  styleUrls: ['./header-examiner.component.css']
 })
 export class HeaderExaminerComponent {
   isDropdownVisible: boolean = false;
+  isHeaderCollapsed: boolean = false; // State for header collapse
   user: any;
-
-  constructor(private router: Router, private authService: AuthService) { }
-
-  logout(): void {
-    this.router.navigate(['/']).then(() => {
-      this.authService.logout();
-      this.user = null;
-      window.location.reload();
-    });
-  }
-
+  unread: number = 0;
   searchTerm: string = '';
-  onSearch(): void {
-    this.router.navigate(['/search', this.searchTerm]);
-  }
+
+  constructor(private router: Router, private authService: AuthService, private userNotificationsService: UserNotificationsService) { }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -37,24 +28,51 @@ export class HeaderExaminerComponent {
         this.user = JSON.parse(storedUser);
       }
     }
+
+    this.userNotificationsService.getUserNotifications(this.user.userId).subscribe(
+      (userNotifications) => {
+        this.unread = userNotifications.notifications.filter(notification => !notification.readStatus).length;
+      },
+      (error) => {
+        console.error('Error fetching user notifications:', error);
+      }
+    );
   }
 
-  // This will be used to listen for clicks outside the dropdown
-  @ViewChild('practiceDropdown') practiceDropdown!: ElementRef;
+  // Navigate to search results
+  onSearch(): void {
+    if (this.searchTerm.trim()) {
+      this.router.navigate(['/search', this.searchTerm.trim()]);
+    }
+  }
 
-  // Toggle dropdown visibility
+  // Log out the user
+  logout(): void {
+    this.router.navigate(['/']).then(() => {
+      this.authService.logout();
+      this.user = null;
+      window.location.reload();
+    });
+  }
+
+  // Toggle the dropdown visibility
   toggleDropdown(event: MouseEvent): void {
-    // Prevents event from bubbling up and triggering the outside click handler
     event.stopPropagation();
     this.isDropdownVisible = !this.isDropdownVisible;
   }
 
-  // Close the dropdown if clicked outside
+  // Toggle header collapse for smaller screens
+  toggleHeader(): void {
+    this.isHeaderCollapsed = !this.isHeaderCollapsed;
+  }
+
+  // Listen for clicks outside of the dropdown to close it
+  @ViewChild('practiceDropdown') practiceDropdown!: ElementRef;
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     if (this.practiceDropdown && !this.practiceDropdown.nativeElement.contains(event.target)) {
       this.isDropdownVisible = false;
     }
   }
-
 }

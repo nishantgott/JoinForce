@@ -1,0 +1,13 @@
+<div class="flex items-center space-x-4 p-4 rounded-lg transition-shadow duration-300">
+    <!-- Profile Picture -->
+    <img [routerLink]="['/candidate-profile',profile?.actualUserId]" *ngIf="profile?.profilePicture"
+        [src]="profile?.profilePicture" alt="{{ profile?.fullName }}"
+        class="w-16 h-16 rounded-full object-cover border border-[#40534C] hover:cursor-pointer hover:border-4">
+
+    <!-- Profile Details -->
+    <!-- <div *ngIf="profile" class="text-left">
+        <h3 class="text-xl font-bold text-[#1A3636]">{{ profile.fullName }}</h3>
+        <p class="text-sm text-[#40534C] mt-1">{{ profile.qualifications }}</p>
+        <p class="text-sm text-[#66785F] mt-1">{{ profile.experience }}</p>
+    </div> -->
+</div>

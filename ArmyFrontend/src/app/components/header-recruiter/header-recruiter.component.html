@@ -1,51 +1,62 @@
-<header class="flex items-center justify-between px-6 py-4 shadow-md"
+<header class="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-[#B2C9AD] px-4 sm:px-6 py-4 shadow-md"
     style="background-image: url('https://storage.needpix.com/rsynced_images/combat-pattern-background.jpg'); background-size: cover; background-position: center;">
-    <!-- Logo Section -->
-    <div class="flex items-center space-x-8">
-        <div class="flex items-center">
+    <!-- Logo and Search Section -->
+    <div class="flex items-center justify-between w-full sm:w-auto">
+        <div class="flex items-center space-x-4">
             <img src="/military-tank.svg" [routerLink]="['/']" alt="Military Tank Logo"
-                class="w-20 hover:cursor-pointer" />
+                class="w-16 sm:w-20 hover:cursor-pointer" />
+            <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
+                class="hidden sm:block w-64 px-4 py-2 border border-[#91AC8F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F] bg-white bg-opacity-75 text-black" />
         </div>
-        <input type="text" placeholder="Search Opportunities" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()"
-            class="w-64 px-4 py-2 border border-[#91AC8F] rounded-full focus:outline-none focus:ring-2 focus:ring-[#91AC8F] bg-white bg-opacity-75 text-black" />
+        <button class="text-white bg-[#1A3636] px-4 py-2 rounded-lg sm:hidden focus:outline-none"
+            (click)="toggleHeader()">
+            Menu
+        </button>
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex items-center ml-6 space-x-8 text-white">
+    <nav class="flex-col sm:flex-row sm:items-center sm:ml-6 sm:space-x-8 text-white space-y-4 sm:space-y-0 mt-4 sm:mt-0"
+        [ngClass]="{ 'hidden sm:flex': !isHeaderCollapsed, 'flex': isHeaderCollapsed }">
         <a [routerLink]="['/candidate-profile-list']" class="hover:underline hover:text-[#91AC8F]">Candidates</a>
         <a [routerLink]="['/application-review-list']" class="hover:underline hover:text-[#91AC8F]">Reviews</a>
         <a [routerLink]="['/create_vacancy']" class="hover:underline hover:text-[#91AC8F]">Create</a>
         <a [routerLink]="['/my-vacancies']" class="hover:underline hover:text-[#91AC8F]">Analytics</a>
-        <a [routerLink]="['/notifications']" class="hover:underline hover:text-[#91AC8F]">Notifications</a>
 
-        <!-- Practice Link with Dropdown -->
+        <!-- Notifications -->
+        <div class="relative flex items-center">
+            <svg [routerLink]="['/notifications']" class="MuiSvgIcon-root jss78 w-10 hover:cursor-pointer"
+                focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M12.1832 3C10.664 3 9.207 3.6035 8.13275 4.67775C7.05851 5.75199 6.455 7.20898 6.455 8.72819C6.455 11.4717 5.86822 13.1754 5.32745 14.1668C5.05594 14.6646 4.79156 14.9911 4.6079 15.185C4.51586 15.2822 4.44354 15.3466 4.39999 15.3829C4.37821 15.401 4.3636 15.4121 4.3573 15.4168L4.35496 15.4186C4.0616 15.6201 3.93179 15.9887 4.03518 16.3301C4.13967 16.6753 4.45777 16.9113 4.81838 16.9113H19.548C19.9086 16.9113 20.2267 16.6753 20.3312 16.3301C20.4346 15.9887 20.3048 15.6201 20.0114 15.4186L20.0091 15.4168C20.0028 15.4121 19.9882 15.401 19.9664 15.3829C19.9229 15.3466 19.8505 15.2822 19.7585 15.185C19.5748 14.9911 19.3105 14.6646 19.0389 14.1668C18.4982 13.1754 17.9114 11.4717 17.9114 8.72819C17.9114 7.20898 17.3079 5.75199 16.2336 4.67775C15.1594 3.6035 13.7024 3 12.1832 3ZM17.6022 14.9505C17.6644 15.0647 17.7269 15.1727 17.7892 15.2747H6.5772C6.63946 15.1727 6.70197 15.0647 6.76424 14.9505C7.45095 13.6916 8.09163 11.7129 8.09163 8.72819C8.09163 7.64304 8.5227 6.60234 9.29002 5.83502C10.0573 5.0677 11.098 4.63663 12.1832 4.63663C13.2683 4.63663 14.3091 5.0677 15.0764 5.83502C15.8437 6.60234 16.2748 7.64304 16.2748 8.72819C16.2748 11.7129 16.9154 13.6916 17.6022 14.9505ZM11.475 18.9557C11.2482 18.5647 10.7474 18.4317 10.3565 18.6584C9.96558 18.8852 9.83251 19.3859 10.0593 19.7769C10.2751 20.1489 10.5848 20.4577 10.9575 20.6724C11.3302 20.887 11.7527 21 12.1828 21C12.6129 21 13.0354 20.887 13.4081 20.6724C13.7808 20.4577 14.0905 20.1489 14.3063 19.7769C14.5331 19.3859 14.4 18.8852 14.0091 18.6584C13.6182 18.4317 13.1174 18.5647 12.8906 18.9557Z">
+                </path>
+            </svg>
+            <div
+                class="absolute top-0 right-0 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center transform translate-x-2 -translate-y-2 text-xs">
+                {{ unread }}
+            </div>
+        </div>
+
+        <!-- Dropdown -->
         <div class="relative border-2 border-[#91AC8F] rounded-2xl py-1 px-2 cursor-pointer" #practiceDropdown
             (click)="toggleDropdown($event)">
-            <div class="flex">
-                <a class="text-white">
-                    {{user.username}}
-                </a>
-
-                <!-- Dropdown Toggle Icon -->
-                <span class="ml-2 mt-2" [ngClass]="{'rotate-180 mb-2': isDropdownVisible}">
+            <div class="flex items-center">
+                <span class="text-white">{{ user.username }}</span>
+                <span class="ml-2 mt-2">
                     <svg *ngIf="isDropdownVisible" class="MuiSvgIcon-root jss17553 jss17554 w-3" focusable="false"
                         viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z" fill="white"></path>
+                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
                     </svg>
                     <svg *ngIf="!isDropdownVisible" class="MuiSvgIcon-root jss17553 w-3" focusable="false"
                         viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z" fill="white"></path>
+                        <path d="M12,19.1L1,8.4l2.9-2.8l8.2,7.9l8.2-7.9l2.9,2.8L12,19.1z"></path>
                     </svg>
                 </span>
             </div>
-
-            <!-- Dropdown Menu -->
             <div *ngIf="isDropdownVisible"
                 class="absolute right-0 mt-2 bg-[#91AC8F] border-2 border-white rounded-lg shadow-lg w-40 text-sm z-10">
-                <a [routerLink]="['candidate-profile',user.userId]"
+                <a [routerLink]="['candidate-profile', user.userId]"
                     class="block px-4 py-2 text-white hover:bg-white hover:text-[#91AC8F]">Profile</a>
-                <a (click)="logout()" class="block px-4 py-2 text-white hover:bg-white hover:text-[#91AC8F]">Log
-                    Out</a>
+                <a (click)="logout()" class="block px-4 py-2 text-white hover:bg-white hover:text-[#91AC8F]">Log Out</a>
             </div>
         </div>
     </nav>

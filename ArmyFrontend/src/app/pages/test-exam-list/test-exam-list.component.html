@@ -1,16 +1,18 @@
 <div class="p-8 bg-[#F5F5E9]">
-    <div class="flex justify-center space-x-16 text-xl font-medium">
-        <!-- Tests -->
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center flex-wrap gap-4 md:gap-16 text-lg md:text-xl font-medium">
         <a [routerLink]="['/test-exam-list']"
             class="text-[#1A3636] font-semibold border-b-4 border-[#1A3636] hover:text-[#40534C]">Tests</a>
-
-        <!-- Exams -->
         <a [routerLink]="['/test-exam-list2']" class="text-[#40534C] hover:text-[#1A3636]">Exams</a>
     </div>
 
-    <div class="flex flex-col m-8 gap-20" *ngFor="let testSchedule of testSchedules">
-        <div class="bg-[#B2C9AD] p-6 rounded-lg border border-[#40534C] shadow-xl w-full max-w-5xl mx-auto">
-            <div class="flex border-b border-[#677D6A] gap-6 pb-4">
+    <!-- Test Schedules -->
+    <div class="flex flex-col gap-12 m-6" *ngFor="let testSchedule of testSchedules">
+        <div
+            class="bg-[#B2C9AD] p-6 rounded-lg border border-[#40534C] shadow-xl w-full max-w-5xl mx-auto space-y-6 lg:space-y-4">
+            <!-- Header Section -->
+            <div
+                class="flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-4 border-b border-[#677D6A] pb-4">
                 <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                     <g>
                         <path opacity="0.48"
@@ -18,34 +20,34 @@
                             fill-opacity="0.8" fill="#898989"></path>
                     </g>
                 </svg>
-                <div class="flex flex-col gap-1 pb-2">
-                    <h2 class="text-2xl font-semibold text-[#1A3636]">Application {{ testSchedule.applicationId }}</h2>
-                </div>
+                <h2 class="text-2xl font-semibold text-[#1A3636] text-center sm:text-left">Application {{
+                    testSchedule.applicationId }}</h2>
             </div>
 
-            <div class="text-xl text-[#1A3636] mb-4 border-b border-[#677D6A] py-4 flex justify-between">
-                <div class="flex flex-col gap-2">
+            <!-- Details Section -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xl text-[#1A3636] border-b border-[#677D6A] pb-4">
+                <div class="flex flex-col gap-1">
                     <h1 class="text-md font-semibold text-[#40534C]">Test type</h1>
                     <p>{{ testSchedule.testType }}</p>
                 </div>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-1">
                     <h1 class="text-md font-semibold text-[#40534C]">Status</h1>
                     <p>{{ testSchedule.status }}</p>
                 </div>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-1">
                     <h1 class="text-md font-semibold text-[#40534C]">Location</h1>
                     <p>{{ testSchedule.location }}</p>
                 </div>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-1">
                     <h1 class="text-md font-semibold text-[#40534C]">Date</h1>
                     <p>{{ testSchedule.date | date }}</p>
-                    <!-- Date input field to update the test schedule date -->
                     <input type="date" [(ngModel)]="testSchedule.date"
-                        class="p-2 border border-[#40534C] rounded-md bg-[#D6BD98] text-[#1A3636]">
+                        class="p-2 border border-[#40534C] rounded-md bg-[#D6BD98] text-[#1A3636] w-full">
                 </div>
             </div>
 
-            <!-- Box Actions -->
+            <!-- Actions Section -->
             <div class="flex justify-end">
                 <button (click)="updateTestSchedule(testSchedule)"
                     class="px-4 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C] focus:outline-none">

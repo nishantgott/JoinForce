@@ -25,7 +25,9 @@
             class="mb-6 p-8 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
             <div class="flex justify-between items-center border-b border-[#677D6A] pb-4">
                 <div>
-                    <h3 class="text-xl font-semibold text-[#1A3636]">{{ question.senderName }} asks:</h3>
+                    <div>
+                        <h3 class="text-xl font-semibold text-[#1A3636]">{{ question.senderName }} asks:</h3>
+                    </div>
                     <p class="text-[#40534C]">{{ question.createdAt | date }}</p>
                     <p class="text-lg mt-2 text-[#1A3636]">{{ question.questionContent }}</p>
                 </div>

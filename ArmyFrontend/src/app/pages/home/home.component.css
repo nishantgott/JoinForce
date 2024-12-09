@@ -31,5 +31,4 @@
 
 .color-toggle p {
     animation: colorToggle 1s infinite;
-    /* 1 second duration, repeats infinitely */
 }

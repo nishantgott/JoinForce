@@ -1,17 +1,16 @@
 <div class="p-8 bg-[#F5F5E9]">
-    <div class="flex justify-center space-x-16 text-xl font-medium">
-        <!-- Tests -->
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center flex-wrap gap-4 md:gap-16 text-lg md:text-xl font-medium">
         <a [routerLink]="['/test-exam-list']" class="text-[#40534C] hover:text-[#1A3636]">Tests</a>
-
-        <!-- Exams -->
         <a [routerLink]="['/test-exam-list2']"
             class="text-[#1A3636] font-semibold border-b-4 border-[#1A3636] hover:text-[#40534C]">Exams</a>
     </div>
 
-    <div class="flex flex-col gap-8 p-8" *ngFor="let exam of exams">
+    <!-- Exams Section -->
+    <div class="flex flex-col gap-8 p-4 md:p-8" *ngFor="let exam of exams">
         <div class="bg-[#B2C9AD] p-6 rounded-lg border border-[#40534C] shadow-lg max-w-5xl w-full mx-auto">
             <!-- Title Section -->
-            <div class="flex items-center border-b border-[#677D6A] pb-4 gap-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center border-b border-[#677D6A] pb-4 gap-4">
                 <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                     <g>
                         <path opacity="0.48"
@@ -27,7 +26,8 @@
             </div>
 
             <!-- Content Section -->
-            <div class="grid grid-cols-3 gap-6 text-[#1A3636] mt-4 border-b border-[#677D6A] pb-4">
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-[#1A3636] mt-4 border-b border-[#677D6A] pb-4">
                 <div>
                     <h1 class="text-md font-semibold text-[#40534C]">Passing Criteria</h1>
                     <p>{{ exam.passingCriteria }}</p>
@@ -43,16 +43,15 @@
             </div>
 
             <!-- Actions Section -->
-            <div class="flex justify-between items-center mt-4">
-                <div class="rounded-lg px-4 py-2 text-white" [ngClass]="{
-                    'bg-red-500': exam.status === 'Upcoming',
-                    'bg-gray-500': exam.status === 'Completed'
-                }">
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-4">
+                <div class="rounded-lg px-4 py-2 text-white text-center sm:text-left" [ngClass]="{
+                        'bg-red-500': exam.status === 'Upcoming',
+                        'bg-gray-500': exam.status === 'Completed'
+                    }">
                     {{ exam.status }}
                 </div>
-
                 <button [routerLink]="['/vacancy', exam.vacancyId]"
-                    class="px-4 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C]">
+                    class="px-4 py-2 mt-4 sm:mt-0 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C]">
                     View Job
                 </button>
             </div>

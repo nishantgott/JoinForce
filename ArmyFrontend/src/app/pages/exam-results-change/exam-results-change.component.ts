@@ -7,11 +7,12 @@ import { ApplicationService } from '../../services/application.service';
 import { TestScheduleService } from '../../services/test-schedule.service';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 import { RouterModule } from '@angular/router';
+import { ProfileIconComponent } from "../../components/profile-icon/profile-icon.component";
 
 @Component({
   selector: 'app-exam-results-change',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ProfileIconComponent],
   templateUrl: './exam-results-change.component.html',
   styleUrls: ['./exam-results-change.component.css']
 })

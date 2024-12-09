@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { UserNotification, UserNotificationsService } from '../../services/user-notifications.service';
 import { RouterModule } from '@angular/router';
 import { Application, ApplicationService } from '../../services/application.service';
+import { ProfileIconComponent } from '../../components/profile-icon/profile-icon.component';
 
 @Component({
   selector: 'app-create-evaluation-report',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ProfileIconComponent],
   templateUrl: './create-evaluation-report.component.html',
   styleUrls: ['./create-evaluation-report.component.css']
 })

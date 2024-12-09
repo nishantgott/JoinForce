@@ -15,6 +15,7 @@
         <!-- Results List -->
         <div *ngFor="let application of applications"
             class="mb-6 p-6 bg-[#B2C9AD] rounded-lg shadow-md border border-[#40534C]">
+            <app-profile-icon [actualUserId]="application.userId"></app-profile-icon>
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-semibold text-[#1A3636]">Application ID: {{ application.applicationId }}</h3>
                 <h3 class="text-2xl font-semibold text-[#40534C]">Status: {{ application.applicationStatus }}</h3>

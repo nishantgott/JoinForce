@@ -29,16 +29,16 @@
         <!-- Tab Navigation -->
         <div class="mt-6 bg-[#B2C9AD] p-4 rounded-lg shadow-lg">
             <div class="flex gap-6 text-[#1A3636] font-medium">
-                <button class="border-b-4 border-[#1A3636] pb-1">Recruitment Process</button>
+                <button class="hover:text-[#40534C]" href=".recruitment-process">Recruitment
+                    Process</button>
                 <button class="hover:text-[#40534C]">Job Description</button>
                 <button class="hover:text-[#40534C]">Dates & Deadlines</button>
-                <button class="hover:text-[#40534C]">Reviews</button>
                 <button class="hover:text-[#40534C]">FAQs & Discussions</button>
             </div>
         </div>
 
         <!-- Recruitment Process Section -->
-        <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+        <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg recruitment-process">
             <h2 class="text-2xl font-semibold text-[#1A3636]">Recruitment Process</h2>
             <div class="mt-4 flex items-center gap-6">
                 <div class="bg-[#D6BD98] text-[#1A3636] font-bold text-xl p-4 rounded-lg shadow-md">
@@ -81,7 +81,7 @@
                         alt="Salary" class="w-16">
                     <div>
                         <h3 class="text-lg font-bold text-[#1A3636]">Salary</h3>
-                        <p class="text-sm text-[#40534C]">{{ vacancy?.salary | currency }}</p>
+                        <p class="text-sm text-[#40534C]">₹{{ vacancy?.salary }}</p>
                     </div>
                 </div>
 

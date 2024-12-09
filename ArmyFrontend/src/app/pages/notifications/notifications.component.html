@@ -2,15 +2,32 @@
     <div class="container mx-auto bg-white p-6 border border-[#D6BD98] m-6 rounded-xl shadow-lg">
         <h1 class="text-3xl font-bold text-center text-[#1A3636] mb-8">Notifications</h1>
 
+        <!-- Filter Buttons -->
+        <div class="flex justify-center space-x-4 mb-8">
+            <button (click)="setActiveFilter('unread')" [ngClass]="{
+                  'border-2 border-[#D6BD98]': activeFilter === 'unread'
+                }"
+                class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C] focus:outline-none focus:ring-2 focus:ring-[#677D6A] font-bold">
+                Unread
+            </button>
+            <button (click)="setActiveFilter('read')" [ngClass]="{
+                  'border-2 border-[#D6BD98]': activeFilter === 'read'
+                }"
+                class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C] focus:outline-none focus:ring-2 focus:ring-[#677D6A] font-bold">
+                Read
+            </button>
+        </div>
+
+
         <!-- No Notifications -->
-        <div *ngIf="notifications.length === 0" class="text-center text-[#66785F]">
+        <div *ngIf="filteredNotifications.length === 0" class="text-center text-[#66785F]">
             <p>No notifications available.</p>
         </div>
 
         <!-- Notifications List -->
-        <div *ngIf="notifications.length > 0" class="space-y-6">
+        <div *ngIf="filteredNotifications.length > 0" class="space-y-6">
             <!-- Notification Card -->
-            <div *ngFor="let notification of notifications"
+            <div *ngFor="let notification of filteredNotifications"
                 class="bg-[#B2C9AD] shadow-lg rounded-lg p-6 border border-[#40534C]">
                 <div class="flex items-center justify-between border-b border-[#677D6A] pb-4">
                     <span class="text-xl font-semibold text-[#1A3636]">{{ notification.notificationType }}</span>

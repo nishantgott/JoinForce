@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Application, ApplicationService } from '../../services/application.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ProfileIconComponent } from "../../components/profile-icon/profile-icon.component";
 
 @Component({
   selector: 'app-application-review-list',
   standalone: true,
-  imports: [DatePipe, CommonModule, RouterModule],
+  imports: [DatePipe, CommonModule, RouterModule, ProfileIconComponent],
   templateUrl: './application-review-list.component.html',
   styleUrl: './application-review-list.component.css'
 })

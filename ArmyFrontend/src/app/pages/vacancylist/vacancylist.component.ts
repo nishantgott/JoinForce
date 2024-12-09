@@ -2,19 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { VacancyService } from '../../services/vacancy.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-vacancylist',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './vacancylist.component.html',
   styleUrls: ['./vacancylist.component.css']
 })
 export class VacancylistComponent implements OnInit {
-  vacancies: any[] = []; // Array to hold the vacancies
-  isLoading: boolean = true; // To show a loading indicator while fetching vacancies
-  error: string | null = null; // For error handling
+  vacancies: any[] = [];
+  filteredVacancies: any[] = [];
+  isLoading: boolean = true;
+  error: string | null = null;
   user: any;
+
+  // Filters
+  selectedRole: string = '';
+  selectedExperience: number | null = null;
+  selectedSalary: number | null = null; // New salary filter
 
   constructor(private vacancyService: VacancyService) { }
 
@@ -28,18 +35,30 @@ export class VacancylistComponent implements OnInit {
     }
   }
 
-  // Fetch all vacancies from the VacancyService
   fetchVacancies(): void {
     this.vacancyService.getAllVacancies().subscribe(
       (data: any[]) => {
-        this.vacancies = data; // Store the vacancies in the array
-        console.log(this.vacancies);
-        this.isLoading = false; // Set loading to false once data is fetched
+        this.vacancies = data;
+        this.filteredVacancies = data; // Initialize with all vacancies
+        this.isLoading = false;
       },
       (error) => {
-        this.error = 'Failed to load vacancies'; // Handle errors
+        this.error = 'Failed to load vacancies';
         this.isLoading = false;
       }
     );
+  }
+
+  applyFilters(): void {
+    this.filteredVacancies = this.vacancies.filter(vacancy => {
+      const matchesRole = this.selectedRole ? vacancy.role === this.selectedRole : true;
+      const matchesExperience = this.selectedExperience
+        ? vacancy.experienceMin >= this.selectedExperience
+        : true;
+      const matchesSalary = this.selectedSalary
+        ? vacancy.salary >= this.selectedSalary
+        : true; // Check if salary meets criteria
+      return matchesRole && matchesExperience && matchesSalary;
+    });
   }
 }

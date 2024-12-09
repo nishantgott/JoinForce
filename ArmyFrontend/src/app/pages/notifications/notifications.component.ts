@@ -12,7 +12,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class NotificationsComponent implements OnInit {
   notifications: UserNotification[] = [];
+  filteredNotifications: UserNotification[] = [];
   userId: number = 0;
+  activeFilter: 'unread' | 'read' = 'unread';
 
   constructor(private userNotificationsService: UserNotificationsService) { }
 
@@ -22,22 +24,20 @@ export class NotificationsComponent implements OnInit {
 
   loadUserNotifications(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
-      // Check if we are in a browser environment
       const storedUser = localStorage.getItem('user');
-      // console.log('this is');
-      // console.log(storedUser);
       if (storedUser) {
         const user = JSON.parse(storedUser);
-        // console.log(user.userId);
         this.userId = user.userId;
       }
     }
 
     if (this.userId) {
-      // Fetch notifications if userId is set
       this.userNotificationsService.getUserNotifications(this.userId).subscribe(
         (userNotifications) => {
-          this.notifications = userNotifications.notifications;
+          this.notifications = userNotifications.notifications.sort((a, b) =>
+            new Date(b.dateSent).getTime() - new Date(a.dateSent).getTime()
+          );
+          this.filterNotifications('unread'); // Default to 'unread'
         },
         (error) => {
           console.error('Error fetching notifications:', error);
@@ -48,30 +48,34 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
+  filterNotifications(status: 'read' | 'unread'): void {
+    this.activeFilter = status; // Set active filter
+    this.filteredNotifications = this.notifications.filter(notification =>
+      status === 'read' ? notification.readStatus : !notification.readStatus
+    );
+  }
 
+  setActiveFilter(filter: 'read' | 'unread'): void {
+    this.filterNotifications(filter); // Reuse filtering logic
+  }
 
   markAsRead(notificationId: number): void {
-    // Optimistic UI Update: Immediately set the read status to true
     const notification = this.notifications.find(n => n.notificationId === notificationId);
-
     if (notification) {
       notification.readStatus = true;
     }
 
-    // Call the backend to update the read status
     this.userNotificationsService.markNotificationAsRead(notificationId).subscribe(
       () => {
         console.log('Notification marked as read successfully.');
       },
       (error) => {
-        // If the backend fails, revert the optimistic update
         console.error('Error marking notification as read:', error);
         if (notification) {
-          notification.readStatus = false; // Revert the change
+          notification.readStatus = false;
         }
       }
     );
   }
-
 
 }

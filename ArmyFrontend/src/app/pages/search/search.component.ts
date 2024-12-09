@@ -14,7 +14,13 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 export class SearchComponent implements OnInit {
   searchTerm: string = '';
   vacancies: any[] = [];
+  filteredVacancies: any[] = [];
   isLoading: boolean = false;
+
+  // Filters
+  selectedRole: string = '';
+  selectedExperience: number | null = null;
+  selectedSalary: number | null = null;
 
   constructor(
     private vacancyService: VacancyService,
@@ -22,7 +28,7 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const query = params.get('query');
       if (query) {
         this.searchTerm = query;
@@ -41,6 +47,7 @@ export class SearchComponent implements OnInit {
     this.vacancyService.searchVacancies(this.searchTerm).subscribe(
       (data) => {
         this.vacancies = data;
+        this.filteredVacancies = data; // Initialize with all vacancies
         this.isLoading = false;
       },
       (error) => {
@@ -48,5 +55,16 @@ export class SearchComponent implements OnInit {
         this.isLoading = false;
       }
     );
+  }
+
+  applyFilters(): void {
+    this.filteredVacancies = this.vacancies.filter((vacancy) => {
+      const matchesRole = this.selectedRole ? vacancy.role === this.selectedRole : true;
+      const matchesExperience = this.selectedExperience
+        ? vacancy.experienceMin >= this.selectedExperience
+        : true;
+      const matchesSalary = this.selectedSalary ? vacancy.salary >= this.selectedSalary : true;
+      return matchesRole && matchesExperience && matchesSalary;
+    });
   }
 }
